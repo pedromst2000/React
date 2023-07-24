@@ -26,3 +26,9 @@ body {
   gap: 3em;
   padding: 3em;
 }
+
+.profile-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
