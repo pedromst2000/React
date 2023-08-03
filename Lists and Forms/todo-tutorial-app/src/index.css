@@ -1,0 +1,148 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #242424;
+  color: #ffff;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  gap:2em;
+  flex-wrap: wrap;
+  padding: 1em;
+}
+
+form > input{
+    padding: 10px;
+    width: 25em;
+    border-radius: 10px;
+  }
+
+  /* background input */
+  form > input[type="text"]{
+    background-color: #196ae3;
+    border: 1px solid #ffff;
+    color: #ffff;
+  }
+
+  /* input background on focus */
+  form > input[type="text"]:focus{
+    background-color: #06214b;
+    border: 1px solid #ffff;
+    color: #ffff;
+  }
+
+
+  /* color of the placeholder */
+  form > input[type="text"]::placeholder{
+    color: #ffff;
+  }
+
+  /* input submit */
+  form > input[type="submit"]{
+    background-color: #06214b;
+    border: 1px solid #ffff;
+    color: #ffff;
+    cursor: pointer;
+    margin-top: -1em;
+  }
+
+  /* input submit hover */
+  form > input[type="submit"]:hover{
+    background-color: #196ae3;
+    border: 1px solid #ffff;
+    color: #ffff;
+  }
+
+  .todo-list h2{
+    padding: 1em;
+    margin-right: 12em;
+  }
+
+
+/* remove the bullet */
+ul{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list ul{
+  display: flex;
+  flex-direction: column;
+  gap:2em;
+  padding-right: 10em;
+}
+
+
+.list ul li {
+  display: inline-flex;
+  align-items: center;
+  gap: 1em;
+}
+
+/* increase the size of the checkbox */
+.list ul li input[type="checkbox"]{
+  width: 1.8em;
+  height: 1.8em;
+  cursor: pointer;
+}
+
+/* color of the checkbox */
+.list ul li input[type="checkbox"]:checked{
+accent-color: #196ae3;
+}
+
+
+/* line-throught when check in the classname span completed*/
+.list ul li .completed{
+  text-decoration: line-through;
+}
+
+.task-required{
+  color: red;
+  font-size: .8em;
+  margin-left: 1em;
+  margin-top: -2em;
+}
+
+/* remove the task after 3secs */
+.remove{
+  animation: remove 3s ease-in-out;
+}
+
+@keyframes remove{
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+    visibility: hidden;
+  }
+}
