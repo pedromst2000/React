@@ -47,18 +47,41 @@ export default function App() {
 
   const [searchVal, setSearchVal] = useState("");
   const [genreVal, setGenreVal] = useState("all");
-  const [isFilterSearching, setIsFilterSearching] = useState(false);
-  const [isFilterGenrers, setIsFilterGenrers] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("series", JSON.stringify(series));
   }, [series]);
 
+
   function addSerie(newSerie) {
-    console.log(newSerie);
+    //  when adding the cover get the real path of the image and not the fake path
+    // give the cover the real path with src/assets/images/
+    newSerie.cover = newSerie.cover.replace("C:\\fakepath\\", "src/assets/images/");
+    
+    const validGenres = ["action", "comedy", "drama", "horror"];
+
+    // if the title already exists
+    if (series.some((serie) => serie.title === newSerie.title.toLowerCase())) {
+      alert("This serie already exists");
+      return;
+    }
+    // if the genre is not valid
+    if (!validGenres.includes(newSerie.genre)) {
+      alert("Please select a genre");
+      return;
+    }
+    // if the cover is empty
+    if (newSerie.cover === "") {
+      alert("Please select a cover");
+      return;
+    }
+
+    return setSeries([...series, newSerie]);
+
   }
 
-  function removeSerie(id) {
+
+    function removeSerie(id) {
     const confirmDelete = window.confirm(
       `Are you sure you want to delete the serie "${series[id - 1].title}"?`
     );
@@ -74,63 +97,36 @@ export default function App() {
         series[id - 1].title
       }"?`
     );
+
+      const genres = ["action", "comedy", "drama", "horror"];
+
     if (confirmEdit) {
-      const newGenre = prompt("Enter the new genre");
-      const newSeries = series.map((serie) => {
-        if (serie.id === id) {
-          serie.genre = newGenre;
+      
+      while (true) {
+        const genre = prompt(
+          `Enter the genre of the serie "${series[id - 1].title}"`
+        );
+          // if is empty
+        if (genre === "" || genre === null) {
+          alert("Please enter a genre");
+          continue;
         }
-        return serie;
-      });
-      setSeries(newSeries);
+        // if is not in the array
+        if (!genres.includes(genre.toLowerCase())) {
+          alert("Please enter a valid genre");
+          continue;
+        }
+        // if is in the array
+        if (genres.includes(genre.toLowerCase())) {
+          series[id - 1].genre = genre.toLowerCase();
+          setSeries([...series]);
+          break;
+        }
+    } 
+    // if it is canceled
+    } else {
+      return;
     }
-  }
-
-  function filteringTitle() {
-    
-    console.log("is filter title");
-
-    // const filterTilteArray = series.filter((serie) => serie.title.toLowerCase().includes(searchVal.toLowerCase()));
-
-    //   if(filterTilteArray.length > 0) {
-    //       return filterTilteArray.map((serie) => (
-    //           <tr key={serie.id}>
-    //               <td>{serie.title}</td>
-    //               <td>{serie.genre}</td>
-    //               <td><img src={serie.cover} alt={serie.title} /></td>
-    //               <td>
-    //                   <button onClick={() => removeSerie(serie.id)}>Delete</button>
-    //                   <button onClick={() => editSerie(serie.id)}>Edit</button>
-    //               </td>
-    //           </tr>
-    //       ))
-    //   }
-    //   else{
-    //       return <tr><td colSpan="4">No results found</td></tr>
-    //   }
-  }
-
-  function filteringGenre() {
-    console.log("is filter genre");
-
-    // const filterGenreArray = series.filter((serie) => serie.genre.toLowerCase().includes(genreVal.toLowerCase()));
-
-    // if(filterGenreArray.length > 0) {
-    //     return filterGenreArray.map((serie) => (
-    //         <tr key={serie.id}>
-    //             <td>{serie.title}</td>
-    //             <td>{serie.genre}</td>
-    //             <td><img src={serie.cover} alt={serie.title} /></td>
-    //             <td>
-    //                 <button onClick={() => removeSerie(serie.id)}>Delete</button>
-    //                 <button onClick={() => editSerie(serie.id)}>Edit</button>
-    //             </td>
-    //         </tr>
-    //     ))
-    // }
-    // else{
-    //     return <tr><td colSpan="4">No results found for the genrer {genre}</td></tr>
-    // }
   }
 
   return (
@@ -139,7 +135,9 @@ export default function App() {
         message="Welcome to the series form"
         info="add your favourite tv series"
       />
-      <FormSeries addSerie={addSerie} />
+      <FormSeries addSerie={addSerie}
+      series={series}
+      />
       <FilterMessage
         messageFilter="Filter your series"
         infoFilter="filter by genre or by title"
@@ -151,13 +149,19 @@ export default function App() {
         genrerVal={genreVal}
       />
       <TableSeries
-        series={series}
-        isFilterSearch={isFilterSearching}
-        isFilterGenre={isFilterGenrers}
-        filterGenre={filteringGenre}
-        filterTitle={filteringTitle}
-        setFilterGenre={setIsFilterGenrers}
-        setFilterTitle={setIsFilterSearching}
+        series={series
+          .filter((serie) => {
+            if(genreVal != "all"){
+              return serie.genre === genreVal;
+            }
+            if(searchVal != ""){
+              return serie.title.toLowerCase().includes(searchVal.toLowerCase());
+            }
+            return serie;
+          })
+          }
+        searchFilter={searchVal}
+        genrerFilter={genreVal}
         removeSerie={removeSerie}
         editSerie={editSerie}
       />

@@ -1,23 +1,7 @@
 import PropTypes from 'prop-types'
 
-function TableSeries({removeSerie, editSerie, series, isFilterSearch, isFilterGenre, filterTitle, filterGenre, title, genre, setFilterTitle, setFilterGenre}) {
-  
-    function checkFilterSearch() {
-        if(title !== "") {
-            setFilterTitle(true);
-            setFilterGenre(false);            
-            filterTitle();
-        }
-    }
+function TableSeries({removeSerie, editSerie, series}) {
 
-
-    function checkFilterGenre() {
-        if(genre !== "all") {
-            setFilterGenre(true);
-            setFilterTitle(false);
-            filterGenre();
-        }
-    }
 
 
     return (
@@ -33,17 +17,25 @@ function TableSeries({removeSerie, editSerie, series, isFilterSearch, isFilterGe
             </thead>
             <tbody>
                 {
-                    isFilterSearch ? checkFilterSearch() : isFilterGenre ? checkFilterGenre() : series.map((serie) => (
+                    // if returns an empty array
+                series.length === 0 ? (
+                    <tr>
+                        <td colSpan="4">No series found</td>
+                    </tr>
+                ) : (
+                    // if returns an array with data
+                    series.map((serie) => (
                         <tr key={serie.id}>
                             <td>{serie.title}</td>
                             <td>{serie.genre}</td>
                             <td><img src={serie.cover} alt={serie.title} /></td>
                             <td>
-                                <button onClick={() => removeSerie(serie.id)}>Delete</button>
+                                <button onClick={() => removeSerie(serie.id)}>Remove</button>
                                 <button onClick={() => editSerie(serie.id)}>Edit</button>
                             </td>
                         </tr>
                     ))
+                )
                 }
                 </tbody>
         </table>
@@ -55,12 +47,6 @@ TableSeries.propTypes = {
     removeSerie: PropTypes.func.isRequired,
     editSerie: PropTypes.func.isRequired,
     series: PropTypes.array.isRequired,
-    isFilterSearch: PropTypes.bool.isRequired,
-    isFilterGenre: PropTypes.bool.isRequired,
-    filterTitle: PropTypes.func.isRequired,
-    filterGenre: PropTypes.func.isRequired,
-    setFilterGenre: PropTypes.func.isRequired,
-    setFilterTitle: PropTypes.func.isRequired,
 }
 
 export default TableSeries
