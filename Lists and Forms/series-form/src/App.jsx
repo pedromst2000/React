@@ -58,26 +58,35 @@ export default function App() {
     // give the cover the real path with src/assets/images/
     newSerie.cover = newSerie.cover.replace("C:\\fakepath\\", "src/assets/images/");
     
-    const validGenres = ["action", "comedy", "drama", "horror"];
+    setSeries((currentSeries) => {
+      return [
+        ...currentSeries,
+        newSerie
+      ]
+    })
 
+  }
+
+  function validateSerie(validateTitle, validateGenre, validateCover) {
+     
+    const validGenres = ["action", "comedy", "drama", "horror"];
+    
     // if the title already exists
-    if (series.some((serie) => serie.title === newSerie.title.toLowerCase())) {
-      alert("This serie already exists");
+    if (series.find((serie) => serie.title.toLowerCase() === validateTitle.toLowerCase())) {
+      alert("This series already exists");
       return;
     }
+
     // if the genre is not valid
-    if (!validGenres.includes(newSerie.genre)) {
+    else if (!validGenres.includes(validateGenre.toLowerCase())) {
       alert("Please select a genre");
       return;
     }
     // if the cover is empty
-    if (newSerie.cover === "") {
+    else if (validateCover === "") {
       alert("Please select a cover");
       return;
     }
-
-    return setSeries([...series, newSerie]);
-
   }
 
 
@@ -137,6 +146,7 @@ export default function App() {
       />
       <FormSeries addSerie={addSerie}
       series={series}
+      validateSerie={validateSerie}
       />
       <FilterMessage
         messageFilter="Filter your series"

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
 
-function FormSeries({addSerie, series}) {
+function FormSeries({addSerie, series, validateSerie}) {
 
     const [title, setTitle] = useState('');
     const [genre, setGenre] = useState('');
@@ -10,16 +10,23 @@ function FormSeries({addSerie, series}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         
+        // validate the form
+        const validate = validateSerie(title, genre, cover);
+        if(!validate) return;
+
+        // add the serie
         addSerie({
             id: series.length + 1,
-            title,
-            genre,
-            cover
+            title: title,
+            genre: genre,
+            cover: cover,
         });
 
+        // reset the form
         setTitle('');
         setGenre('');
         setCover('');
+    
     };
 
 
@@ -50,6 +57,7 @@ function FormSeries({addSerie, series}) {
 FormSeries.propTypes = {
     addSerie: PropTypes.func.isRequired,
     series: PropTypes.array.isRequired,
+    validateSerie: PropTypes.func.isRequired,
 }
 
 export default FormSeries
