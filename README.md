@@ -2,6 +2,17 @@
 
 # React 
 
+This repo contains all the basic topics of react :
+
+- `Components` and `Props`
+-  `Conditional Rendering`
+- `Hooks` and `Events`
+- `Lists` and `Forms`
+- `React Router Navigation`
+-  `State managment` 
+- `Component Lifecycle`
+
+
 ## How to start an React project
 
 * npm create vite@latest
@@ -53,6 +64,17 @@ Done. Now run:
 * **src**: Contains all the source code of the project
 
 --------------------------------------------------------------
-### React projects :
+ 
+ ## React projects :
 
-* `ReactFacts` - Facts about React - static project - React course 01
+  ## `ReatFacts`
+
+  This project has delevoped with the purpose of learning the basics of React, so it´s a static project, with some facts about React.
+
+  - [repo link](https://github.com/pedromst2000/ReactFacts)
+  - [deploy](https://reactfactsjs.netlify.app/)
+
+ 
+
+
+

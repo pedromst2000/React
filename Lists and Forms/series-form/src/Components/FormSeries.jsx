@@ -9,8 +9,9 @@ function FormSeries({addSerie, series, validateSerie}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+     
         
-        // validate the form
+        // validate the serie
         const validate = validateSerie(title, genre, cover);
         if(!validate) return;
 

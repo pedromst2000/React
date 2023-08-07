@@ -87,6 +87,10 @@ export default function App() {
       alert("Please select a cover");
       return;
     }
+
+    // if all is valid
+    return true
+
   }
 
 
