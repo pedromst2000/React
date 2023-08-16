@@ -9,7 +9,7 @@ This repo contains all the basic topics of react :
 - `Hooks` and `Events`
 - `Lists` and `Forms`
 - `React Router Navigation`
--  `State managment` 
+-  `State managment` with `Context API` or `Redux` 
 - `Component Lifecycle`
 
 
