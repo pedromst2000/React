@@ -11,6 +11,7 @@ This repo contains all the basic topics of react :
 - `React Router Navigation`
 -  `State managment` with `Context API` or `Redux` 
 - `Component Lifecycle`
+- `Fetching API´s`
 
 
 ## How to start an React project
