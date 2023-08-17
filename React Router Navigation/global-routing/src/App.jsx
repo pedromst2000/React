@@ -1,7 +1,8 @@
-import { Route, Routes, Link } from "react-router-dom";
+import { Route, Routes, NavLink } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import CitiesRouter from "./routes/CitiesRouter";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -9,13 +10,13 @@ function App() {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <NavLink to="/about">About</NavLink>
           </li>
           <li>
-            <Link to="/cities">Cities</Link>
+            <NavLink end to="/cities">Cities</NavLink>
           </li>
         </ul>
       </nav>
@@ -25,7 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/cities/*" element={<CitiesRouter/>} />
-        <Route path="*" element={<h3>404 Not Found Page</h3>} />
+        <Route path="*" element={<NotFound/>} />
       </Routes>
     </>
   );
