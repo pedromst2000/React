@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 function MovieItem({ id, cover, title, year, genrer }) {
+  
   return (
     <>
       <div className="movie" key={id}>

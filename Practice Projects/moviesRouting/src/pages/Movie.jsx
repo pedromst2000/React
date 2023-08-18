@@ -14,7 +14,8 @@ function Movie({ movies }) {
     const movie = movies.find((movie) => movie.id === Number(id));
     setData(movie);
 
-    console.log(data.Cover);
+    
+    
     // cleanup function
     return () => {
       setData({});

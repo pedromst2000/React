@@ -14,6 +14,7 @@ function Home({ movies }) {
           title={movie.title}
           year={movie.Year}
           genrer={movie.Genre}
+          
         />
       ))}
     
