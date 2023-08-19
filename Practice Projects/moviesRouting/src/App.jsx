@@ -11,7 +11,6 @@ import silencioCover from "./assets/images/silencio.jpg";
  
 function App() {
 
-
   const [movies, setMovies] = useState(() => {
     const data = [
       {
@@ -135,7 +134,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home movies={movies} />} />
-        <Route path="/movie/:id" element={<Movie movies={movies} />} />
+        <Route path="/movie/:id" element={<Movie movies={movies}/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
