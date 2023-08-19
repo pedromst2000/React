@@ -12,7 +12,13 @@ This repo contains all the basic topics of react :
 -  `State managment` with `Context API` or `Redux` 
 - `Component Lifecycle`
 - `Fetching API´s` with or without `Axios`
+-----------------------------------------------------------
 
+### `Practice Projects`
+
+- MoviesRouting - React project to learn only the basics of React Router without stying
+
+----------------------------------------------------------------------
 
 ## How to start an React project
 
