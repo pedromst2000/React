@@ -12,8 +12,7 @@ This repo contains all the basic topics of react :
 -  `State managment` with `Context API` or `Redux` 
 - `Component Lifecycle`
 - `Fetching API´s` with or without `Axios`
-
-
+-----------------------------------------------------------
 ## How to start an React project
 
 * npm create vite@latest
