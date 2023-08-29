@@ -4,7 +4,6 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Premium from "../pages/Premium";
 import Profile from "../pages/Profile";
-import NotFound from "../pages/NotFound";
 
 // isMenu = true => show in navigation
 
@@ -16,6 +15,7 @@ export const routes = [
     index: true,
     isLogged: false,
     isVisible: true,
+    isPrivate: false,
   },
   {
       path: "/about",
@@ -23,6 +23,7 @@ export const routes = [
       element: <About />,
       isLogged: true,
       isVisible: true,
+      isPrivate: false
     },
   {
       path: "/admin",
@@ -30,6 +31,8 @@ export const routes = [
       element: <AdminManage />,
       isLogged: true,
       isVisible: false,
+      isPrivate: true,
+      isAdmin: true
     },
   {
     path: "/premium",
@@ -37,6 +40,7 @@ export const routes = [
     element: <Premium />,
     isLogged: true,
     isVisible: true,
+    isPrivate: true,
   },
   {
       path: "/profile",
@@ -44,12 +48,14 @@ export const routes = [
       element: <Profile />,
       isLogged: true,
       isVisible: false,
+      isPrivate: true
     },
   {
       path: "/login",
       name: "Login",
       element: <Login />,
       isLogged: true,
-      isVisible: true,  
+      isVisible: true,
+      isPrivate: false  
     }
 ];
