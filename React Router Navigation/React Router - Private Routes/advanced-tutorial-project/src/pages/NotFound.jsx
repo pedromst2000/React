@@ -7,15 +7,9 @@ export default function NotFound() {
   return (
     <div>
       <h3>404 Page Not Found!</h3>
-      <span>it seems you are lost!</span>
+      <span>It seems that you are lost.</span>
       <br />
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Go Home
-      </button>
+      <button onClick={() => navigate("/")}>Go Home</button>
     </div>
   );
 }

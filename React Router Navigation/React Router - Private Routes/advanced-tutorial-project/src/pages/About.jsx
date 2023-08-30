@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default function Login() {
+export default function About() {
   return (
     <div>
         <h3>
-            Login Page
+            About Page
         </h3>
     </div>
   )
