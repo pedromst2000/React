@@ -18,17 +18,27 @@ export default function Login() {
   const [error, setError] = useState("");
 
   const usernameInput = useRef(null);
+  const passwordInput = useRef(null);
 
   useEffect(() => {
+
     usernameInput.current.focus();
-  });
+
+
+  },
+    [
+      usernameInput.current,
+    ]
+  );
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
       await login(formData.username, formData.password);
+      navigate("/profile");
 
+      
     } catch (error) {
       // catch the error of the promise
       setError(error);
@@ -46,6 +56,7 @@ export default function Login() {
       <input
         type="password"
         placeholder="password"
+        ref={passwordInput}
         onChange={(e) => setFormData({ password: e.target.value })}
       />
       <input className="login" type="submit" value="Login" />

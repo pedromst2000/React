@@ -9,6 +9,7 @@ import Premium from "./pages/Premium";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import RequiresAuth from "./components/RequiresAuth";
+import IsLogged from "./components/IsLogged";
 
 function App() {
   return (
@@ -19,7 +20,11 @@ function App() {
           {/* public routes */}
           <Route path="/" index element={<Home />} />
           <Route path="about" element={<About />} />
+        
+          {/*  if the user is logged in redirect to profile page */}
+          <Route element={<IsLogged />}> 
           <Route path="login" element={<Login />} />
+          </Route>
 
           {/* Private Routes - protected Routes */}
           <Route element={<RequiresAuth allowed={["admin"]} />}>
