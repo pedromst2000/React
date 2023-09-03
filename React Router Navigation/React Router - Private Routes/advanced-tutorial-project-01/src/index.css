@@ -18,25 +18,17 @@ body {
   box-sizing: border-box;
 }
 
+
 .active{
   color: red;
 }
 
-.login{
+.login-link:hover{
+  text-decoration: underline;
   cursor: pointer;
 }
 
-.error{
-  color: red;
-  animation : fadeout ease-in-out 300ms;
-}
-
-@keyframes fadeout {
-  100% {
-    opacity: 1;
-  }
-  0% {
-    opacity: 0;
-  }
-  
+.register-link:hover{
+  text-decoration: underline;
+  cursor: pointer;
 }

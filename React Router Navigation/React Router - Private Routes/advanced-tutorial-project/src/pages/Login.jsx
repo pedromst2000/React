@@ -23,6 +23,17 @@ export default function Login() {
   useEffect(() => {
 
     usernameInput.current.focus();
+    
+    // show the error message for 2 seconds
+    if (error) {
+      
+      setInterval(() => {
+        setError("");
+      }
+      , 4000);  
+
+    }
+
 
 
   },
