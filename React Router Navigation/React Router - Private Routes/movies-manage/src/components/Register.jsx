@@ -1,13 +1,10 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import Proptypes from "prop-types";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import { encryptPassword } from "../utils/encryptPassword";
 
 export default function Register({ isClicked, setIsClicked }) {
   const { register } = useAuth();
-  const navigate = useNavigate();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
@@ -17,23 +14,26 @@ export default function Register({ isClicked, setIsClicked }) {
       confirmPassword: "",
     }
   );
-  const usernameRef = useRef();
+  const emailRef = useRef();
 
   useEffect(() => {
-    usernameRef.current.focus();
-  }, [usernameRef.current]);
+    emailRef.current.focus();
+
+  }, [emailRef.current]);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
+
       await register(
         formData.username,
         formData.email,
-        encryptPassword(formData.password),
+        formData.password,
         formData.confirmPassword
-      );
-      navigate("/profile");
+        );
+
+      // catch rejected promises
     } catch (error) {
       setError(error);
     }
@@ -43,18 +43,19 @@ export default function Register({ isClicked, setIsClicked }) {
     <form>
       <h3>Welcome to the Manage Movies App</h3>
       <input
-        type="text"
-        placeholder="username"
-        ref={usernameRef}
-        onChange={(e) => {
-          setFormData({ username: e.target.value });
-        }}
-      />
-      <input
         type="email"
         placeholder="email"
+        ref={emailRef}
         onChange={(e) => {
           setFormData({ email: e.target.value });
+        }}
+      />
+
+      <input
+        type="text"
+        placeholder="username"
+        onChange={(e) => {
+          setFormData({ username: e.target.value });
         }}
       />
       <input
@@ -73,7 +74,9 @@ export default function Register({ isClicked, setIsClicked }) {
         }}
       />
 
-      {error && <p className="error">{error}</p>}
+        {
+          error ? <p className="error">{error}</p> : null
+        }
 
       <p
         onClick={() => {

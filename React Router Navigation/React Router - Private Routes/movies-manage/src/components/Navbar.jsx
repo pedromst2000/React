@@ -28,15 +28,18 @@ export default function Navbar() {
             </NavLink>
         </li> : null
            }
-            <li>
-                <NavLink to="/profile">
-                    Profile
-                </NavLink>
-            </li>
             {
                 User.isLogged ?
                 <li>
-                    <button
+                <NavLink to="/profile">
+                    Profile
+                </NavLink>
+            </li> : null
+            }
+            {
+                User.isLogged ?
+                <li>
+                    <button className='logout-btn'
                         onClick={()=>{logout()}}
                     >
                         Logout

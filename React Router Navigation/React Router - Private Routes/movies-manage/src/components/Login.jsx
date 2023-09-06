@@ -1,11 +1,9 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import Proptypes from "prop-types";
 import useAuth from "../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
 
 export default function Login({ isClicked, setIsClicked }) {
   const { login } = useAuth();
-  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [formData, setFormData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -27,7 +25,6 @@ export default function Login({ isClicked, setIsClicked }) {
 
     try {
       await login(formData.email, formData.password);
-      navigate("/profile");
     } catch (error) {
       setError(error);
     }

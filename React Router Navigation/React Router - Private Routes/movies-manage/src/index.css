@@ -37,3 +37,11 @@ body {
   color: red;
   font-size: 0.8rem;
 }
+
+.edit-btn{
+  cursor: pointer;
+}
+
+.logout-btn{
+  cursor: pointer;
+}

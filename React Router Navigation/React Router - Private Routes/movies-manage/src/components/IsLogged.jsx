@@ -10,10 +10,10 @@ export default function IsLogged() {
     <>
       {
         User.isLogged && location.pathname === "/authenticate" ? 
-        <Navigate to="/" replace  />
+        <Navigate to="/profile" replace  />
         : 
         User.isLogged && location.pathname !== "/authenticate" ?
-        <Navigate to="/" replace  />
+        <Navigate to="/profile" replace  />
         :
         <Outlet />
       }
