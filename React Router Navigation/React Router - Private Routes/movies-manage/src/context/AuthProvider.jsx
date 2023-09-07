@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
 
   // session of the user info for the app
   const [User, setUser] = useState(() => {
-    const loggedUser = sessionStorage.getItem("loggedUser");
+    const loggedUser = localStorage.getItem("loggedUser");
 
     return loggedUser
       ? JSON.parse(loggedUser)
@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
   });
 
   useEffect(() => {
-    sessionStorage.setItem(
+    localStorage.setItem(
       "loggedUser",
       JSON.stringify({
         username: User.username,
@@ -41,6 +41,8 @@ export function AuthProvider({ children }) {
     localStorage.setItem("users", JSON.stringify(users));
 
   }, [User.username, User.email, User.role, User.isLogged, users]);
+
+
 
   const login = (email, password) => {
     return new Promise((resolve, reject) => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import Proptypes from "prop-types";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useAuthProvider";
 
 export default function Register({ isClicked, setIsClicked }) {
   const { register } = useAuth();
@@ -40,7 +40,9 @@ export default function Register({ isClicked, setIsClicked }) {
   };
 
   return (
-    <form>
+    <form
+      className="register-form"
+    >
       <h3>Welcome to the Manage Movies App</h3>
       <input
         type="email"

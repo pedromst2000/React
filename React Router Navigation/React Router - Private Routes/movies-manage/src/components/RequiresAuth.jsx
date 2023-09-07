@@ -1,5 +1,5 @@
 import React from "react";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useAuthProvider";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Proptypes from "prop-types";
 

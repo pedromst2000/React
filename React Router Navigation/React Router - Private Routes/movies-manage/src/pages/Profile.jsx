@@ -1,5 +1,5 @@
 import React from 'react'
-import useAuth from '../hooks/useAuth'
+import useAuth from '../hooks/useAuthProvider'
 
 export default function Profile() {
   
@@ -9,26 +9,36 @@ export default function Profile() {
 
   const handleEditProfile =  async () => {
 
-    let password = prompt("Enter new password");
-    let confirmPassword = prompt("Confirm new password");
+    const confirmEdit = window.confirm("Do you want to change your password?");
 
   
-    // while loop to make sure the user enters the same password twice and that the password is not empty
-    while (password !== confirmPassword || password === "") {
-      alert("Passwords do not match or are empty");
-      password = prompt("Enter new password");
-      confirmPassword = prompt("Confirm new password");
+    if (confirmEdit) {
+
+      let newPassword = prompt("Enter your new password");
+      let confirmPassword = prompt("Confirm your new password");
+
+      if (newPassword) {
+          
+          if (newPassword === confirmPassword) {
+  
+            const response = await editProfile(newPassword);
+  
+            alert(response);
+  
+          } else {
+  
+            alert("Passwords do not match");
+  
+          }
+
+      }
+
+      if(!newPassword){
+        alert("Operation canceled")
+      }
+
     }
 
-    await editProfile(password)
-    .then((message)=>{
-      alert(message);
-    }
-    )
-    .catch((error)=>{
-      alert(error);
-    }
-    )
 
   };
 
@@ -49,7 +59,7 @@ export default function Profile() {
     <button 
     onClick={()=>{handleEditProfile()}}
     className='edit-btn'>
-      Edit Profile
+      change password
     </button>
 
     </div>

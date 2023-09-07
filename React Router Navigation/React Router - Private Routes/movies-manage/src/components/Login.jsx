@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import Proptypes from "prop-types";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../hooks/useAuthProvider";
 
 export default function Login({ isClicked, setIsClicked }) {
   const { login } = useAuth();
@@ -31,7 +31,7 @@ export default function Login({ isClicked, setIsClicked }) {
   };
 
   return (
-    <form>
+    <form className="login-form">
       <h3>Welcome back!</h3>
       <input
         type="email"
