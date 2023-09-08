@@ -138,11 +138,28 @@ export function AuthProvider({ children }) {
           resolve("Profile edited successfully");
 
       });
+  };
+
+  const changeRole = (id, role) => {
+
+    return new Promise((resolve, reject) => {
+
+      const userIndex = users.findIndex((user) => user.id === id);
+
+        const newUsers = [...users];
+
+        newUsers[userIndex].role = role;
+
+        setUsers(newUsers);
+
+        resolve("Role changed successfully");
+
+    });
 
   };
 
   return (
-    <AuthContext.Provider value={{ User, login, register, logout, users, editProfile }}>
+    <AuthContext.Provider value={{ User, login, register, logout, users, editProfile, changeRole }}>
       {children}
     </AuthContext.Provider>
   );

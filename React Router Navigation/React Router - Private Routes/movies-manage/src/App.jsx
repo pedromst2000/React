@@ -12,12 +12,8 @@ import RequiresAuth from './components/RequiresAuth';
 import IsLogged from './components/IsLogged';
 import { AuthProvider } from './context/AuthProvider'
 import { MoviesProvider } from './context/MoviesProvider';
-import useMoviesStore from './hooks/useMoviesProvider';
 
 function App() {
-
-
-  const {filterMoviesByTitle, movies} = useMoviesStore();
 
   return (
     <>
@@ -36,9 +32,7 @@ function App() {
         </Route>
 
         <Route path="/movies">
-          <Route index element={<Movies 
-            moviesArray={movies}
-          />} />
+          <Route index element={<Movies/>} />
           {/* private route */}
           <Route element={<RequiresAuth allowedRoles={["admin", "client"]} />}>
           <Route path=":id" element={<Movie />} />

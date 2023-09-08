@@ -1,9 +1,9 @@
 import React from "react";
-import useAuth from "../hooks/useAuthProvider";
+import useAuthProvider from "../hooks/useAuthProvider";
 import { Outlet, Navigate, useLocation } from "react-router-dom";
 
 export default function IsLogged() {
-  const { User } = useAuth();
+  const { User } = useAuthProvider();
   const location = useLocation();
 
   return (

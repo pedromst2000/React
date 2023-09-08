@@ -74,3 +74,21 @@ body {
   font-size: 1em;
   font-weight: bolder;
 }
+
+.cover img{
+  width: 40%;
+  
+}
+
+
+.editbtn{
+  cursor: pointer;
+}
+
+.deletebtn{
+  cursor: pointer;
+}
+
+.watchbtn{
+  cursor: pointer;
+}

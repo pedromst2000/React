@@ -1,9 +1,9 @@
 import React from 'react'
-import useAuth from '../hooks/useAuthProvider'
+import useAuthProvider from '../hooks/useAuthProvider';
 
 export default function Profile() {
   
-  const {User, editProfile} = useAuth();
+  const {User, editProfile} = useAuthProvider();
   
 
 

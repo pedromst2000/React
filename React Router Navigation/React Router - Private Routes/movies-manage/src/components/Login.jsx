@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import Proptypes from "prop-types";
-import useAuth from "../hooks/useAuthProvider";
+import useAuthProvider from "../hooks/useAuthProvider";
 
 export default function Login({ isClicked, setIsClicked }) {
-  const { login } = useAuth();
+  const { login } = useAuthProvider();
   const [error, setError] = useState(null);
   const [formData, setFormData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),

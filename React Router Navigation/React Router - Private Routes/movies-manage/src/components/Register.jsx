@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import Proptypes from "prop-types";
-import useAuth from "../hooks/useAuthProvider";
+import useAuthProvider from "../hooks/useAuthProvider";
 
 export default function Register({ isClicked, setIsClicked }) {
-  const { register } = useAuth();
+  const { register } = useAuthProvider();
   const [error, setError] = useState("");
   const [formData, setFormData] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
