@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import moviesData from "../data/movies.json";
+import { convertBase64 } from "../utils/convertBase64"; 
 
 const MoviesContext = createContext({});
 
@@ -60,9 +61,26 @@ export function MoviesProvider({ children }) {
     setMovies(newMovies);
   };
 
+
+  const addMovie = (movie) => {
+
+    const newMovie = {
+      ...movie,
+      id: movies.length + 1,
+      Cover: convertBase64(movie.Poster),
+    };
+
+    const newMovies = [...movies, newMovie];
+
+    setMovies(newMovies);
+
+
+
+  };
+
   return (
     <MoviesContext.Provider
-      value={{ movies, filterMoviesByTitle, filterMoviesByGenre, editGenrerMovie, deleteMovie }}
+      value={{ movies, filterMoviesByTitle, filterMoviesByGenre, editGenrerMovie, deleteMovie, addMovie }}
     >
       {children}
     </MoviesContext.Provider>

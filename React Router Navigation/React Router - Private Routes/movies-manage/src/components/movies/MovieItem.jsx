@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import useAuthProvider from "../hooks/useAuthProvider";
-import useMoviesProvider from "../hooks/useMoviesProvider";
+import useAuthProvider from "../../hooks/useAuthProvider";
+import useMoviesProvider from "../../hooks/useMoviesProvider";
 import { Link } from "react-router-dom";
 
 function MovieItem({ ...props }) {

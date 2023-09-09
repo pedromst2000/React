@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import MovieItem from "../../components/MovieItem";
-import SearchBar from "../../components/SearchBar";
+import MovieItem from "../../components/movies/MovieItem";
+import SearchBar from "../../components/movies/SearchBar";
 import useMoviesProvider from "../../hooks/useMoviesProvider";
-import FilterGenre from "../../components/FilterGenre";
+import FilterGenre from "../../components/movies/FilterGenre";
 
 export default function Movies() {
   const { filterMoviesByTitle, filterMoviesByGenre } = useMoviesProvider();
