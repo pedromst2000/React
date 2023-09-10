@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import useAuthProvider from "../hooks/useAuthProvider";
 import useMoviesProvider from "../hooks/useMoviesProvider";
 import TableUsers from "../components/manage/TableUsers";
@@ -6,21 +6,7 @@ import AddMovieForm from "../components/manage/AddMovieForm";
 
 export default function Manage() {
   const { User, users } = useAuthProvider();
-  const { movies } = useMoviesProvider();
-
-  const [formAddMovie, setFormAddMovie] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    {
-      title: "",
-      diretor: "",
-      stars: [],
-      rate: 0,
-      year: 0,
-      genre: "",
-      cover: "",
-      description: ""
-    }
-  );
+  const { movies, addMovie } = useMoviesProvider();
 
   return (
     <div className="manage-container">
@@ -28,16 +14,16 @@ export default function Manage() {
         <h3>Manage Users</h3>
         <TableUsers key={User.id} users={users} />
       </div>
-    <br />
-    <hr />
+      <br />
+      <hr />
       <div className="manage-movies-container">
         <h3>Add Movie to the catalog</h3>
-        
+
         <AddMovieForm
-          formAddMovie={formAddMovie}
-          setFormAddMovie={setFormAddMovie}
+          movies={movies}
+          addMovie={addMovie}
         />
-        </div>
+      </div>
     </div>
   );
 }

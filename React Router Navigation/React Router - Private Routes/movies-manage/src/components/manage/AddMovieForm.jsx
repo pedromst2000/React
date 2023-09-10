@@ -1,30 +1,135 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import PropTypes from "prop-types";
 import StarsList from "./StarsList";
+import CoverPreview from "./CoverPreview";
+import { convertBase64 } from "../../utils/convertBase64";
 
 function AddMovieForm({ ...props }) {
+  const initialState = {
+    title: "",
+    diretor: "",
+    rate: 0,
+    year: 1900,
+    genre: "",
+    cover: "",
+    stars: [],
+    description: "",
+  };
+
+  const reducer = (state, action) => {
+    // to clean the form
+    if (action.type === "RESET") {
+      return initialState;
+    }
+
+    // to update the form
+    if (action.type === "UPDATE") {
+      return {
+        ...state,
+        [action.field]:
+          action.field === "stars"
+            ? [
+                ...state.stars,
+                { id: state.stars.length + 1, name: action.payload },
+              ]
+            : action.payload,
+      };
+    }
+
+    // delete star
+    if (action.type === "DELETE_STAR") {
+      return {
+        ...state,
+        stars: state.stars.filter((star) => star.id !== action.payload),
+      };
+    }
+
+    return state;
+  };
+
+  const [formAddMovie, dispatch] = useReducer(reducer, initialState);
+
+  const [star, setStar] = useState("");
+
   const titleRef = useRef(null);
+  const starRef = useRef(null);
 
   useEffect(() => {
     titleRef.current.focus();
+
   }, [titleRef]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newMovie = {
+      ...formAddMovie,
+      id: props.movies.length + 1,
+    };
+
+    props.addMovie(newMovie);
+
+    dispatch({ type: "RESET" });
+  };
+
+  const addStar = (e) => {
+    e.preventDefault();
+
+    dispatch({
+      type: "UPDATE",
+      field: "stars",
+      payload: star,
+    });
+
+    starRef.current.value = "";
+    starRef.current.focus();
+  };
+
+  const handleconvertBase64 =  () => {
+   
+    console.log(convertBase64());
+  };
 
   return (
     <form>
       <input
         ref={titleRef}
+        value={formAddMovie.title}
+        onChange={(e) => {
+          dispatch({
+            type: "UPDATE",
+            field: "title",
+            payload: e.target.value,
+          });
+        }}
         type="text"
         name="title"
         id="title"
         placeholder="title"
       />
       <input
+        value={formAddMovie.diretor}
+        onChange={(e) => {
+          dispatch({
+            type: "UPDATE",
+            field: "diretor",
+            payload: e.target.value,
+          });
+        }}
         type="text"
         name="diretor"
         id="diretor"
         placeholder="diretor"
       />
       <input
+        value={formAddMovie.rate}
+        onChange={(e) => {
+          dispatch({
+            type: "UPDATE",
+            field: "rate",
+            payload: parseFloat(e.target.value),
+          });
+        }}
         type="number"
         name="rate"
         id="rate"
@@ -34,6 +139,14 @@ function AddMovieForm({ ...props }) {
         placeholder="rate"
       />
       <input
+        value={formAddMovie.year}
+        onChange={(e) => {
+          dispatch({
+            type: "UPDATE",
+            field: "year",
+            payload: parseInt(e.target.value),
+          });
+        }}
         type="number"
         name="year"
         id="year"
@@ -45,6 +158,14 @@ function AddMovieForm({ ...props }) {
         placeholder="year"
       />
       <select
+        value={formAddMovie.genre}
+        onChange={(e) => {
+          dispatch({
+            type: "UPDATE",
+            field: "genre",
+            payload: e.target.value,
+          });
+        }}
         name="genre"
         id="genre"
       >
@@ -58,22 +179,80 @@ function AddMovieForm({ ...props }) {
         <option value="sci-fi">Sci-Fi</option>
         <option value="thriller">Thriller</option>
       </select>
-      <button>Add Cover</button>
+      <div className="cover-preview">
+        <h5>Add the cover of the movie</h5>
+        <CoverPreview
+          cover={formAddMovie.cover}
+        />
+      </div>
+      <button className="add-cover-btn"
+        onClick={(e)=>{
+          e.preventDefault();
+          handleconvertBase64();
+          dispatch({
+            type: "UPDATE",
+            field: "cover",
+            payload: valCover,
+          })
+        }}
+      >Add Cover</button>
       <h5>Add the stars of the movie</h5>
-      <input
-        type="text"
-        name="stars"
-        id="stars"
-        placeholder="actor"
+      <StarsList
+        stars={formAddMovie.stars}
+        deleteStar={(id) => {
+          dispatch({
+            type: "DELETE_STAR",
+            payload: id,
+          });
+        }}
       />
-      <button>Add Star</button>
+      <br />
+      <input
+        value={formAddMovie.star}
+        onChange={(e) => {
+          setStar(e.target.value);
+        }}
+        ref={starRef}
+        type="text"
+        placeholder="star"
+      />
+      <button
+        onClick={(e) => {
+          addStar(e);
+        }}
+        className="btn-add-star"
+      >
+        +
+      </button>
+      <div className="description">
+        <br />
+        <textarea
+          value={formAddMovie.description}
+          onChange={(e) => {
+            dispatch({
+              type: "UPDATE",
+              field: "description",
+              payload: e.target.value,
+            });
+          }}
+          name="description"
+          id="description"
+          cols="30"
+          rows="10"
+          placeholder="description"
+        ></textarea>
+      </div>
+      <br />
+      <button onClick={(e) => handleSubmit(e)} className="add-movie-btn">
+        Add Movie
+      </button>
     </form>
   );
 }
 
 AddMovieForm.propTypes = {
-  formAddMovie: PropTypes.object.isRequired,
-  setFormAddMovie: PropTypes.func.isRequired,
+  movies: PropTypes.array.isRequired,
+  addMovie: PropTypes.func.isRequired,
 };
 
 export default AddMovieForm;

@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import moviesData from "../data/movies.json";
-import { convertBase64 } from "../utils/convertBase64"; 
 
 const MoviesContext = createContext({});
 
@@ -66,15 +65,11 @@ export function MoviesProvider({ children }) {
 
     const newMovie = {
       ...movie,
-      id: movies.length + 1,
-      Cover: convertBase64(movie.Poster),
+      id: movies.length + 1
     };
 
-    const newMovies = [...movies, newMovie];
 
-    setMovies(newMovies);
-
-
+    console.log(newMovie);
 
   };
 

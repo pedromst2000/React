@@ -1,24 +1,37 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import StarsItem from './StarsItem'
+import React from "react";
+import PropTypes from "prop-types";
+import StarsItem from "./StarsItem";
 
-function StarsList({...props}) {
+function StarsList({ ...props }) {
+  
+
+  
   return (
     <div className="actors-list">
-      <h5>Stars List</h5>
-      <ul>
-        {
-          props.formAddMovie.stars.map(stars => (
-            <StarsItem key={stars.id} stars={stars} />
-          ))
-        }
-      </ul>
+      <h5>Stars Preview</h5>
+      <table border="2">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.stars.map((star) => (
+            <StarsItem  key={star.id} star={star}
+              deleteStar={props.deleteStar}
+            />
+          ))}
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }
 
 StarsList.propTypes = {
-  formAddMovie: PropTypes.object.isRequired
-}
+  stars: PropTypes.array.isRequired,
+  deleteStar: PropTypes.func.isRequired,
+};
 
-export default StarsList
+export default StarsList;

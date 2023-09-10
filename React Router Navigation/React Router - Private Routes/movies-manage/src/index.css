@@ -95,3 +95,24 @@ body {
 .rating{
   width: 7%;
 }
+
+.add-movie-btn{
+  cursor: pointer;
+}
+
+.add-start-btn{
+  cursor: pointer;
+}
+
+.add-cover-btn{
+  cursor: pointer;
+}
+
+.btn-delete-star{
+  cursor: pointer;
+}
+
+
+.btn-add-star{
+  cursor: pointer;
+}
