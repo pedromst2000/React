@@ -70,8 +70,6 @@ function AddMovieForm({ ...props }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { title, diretor, rate, year, genre, cover, stars, description } =
-      formAddMovie;
 
       try{
 
