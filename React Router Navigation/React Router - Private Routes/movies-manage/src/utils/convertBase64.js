@@ -1,21 +1,28 @@
 export const convertBase64 = (cover) => {
 
-  let base64 = '';
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'image/*';
+  return new Promise((resolve, reject) => {
 
-  input.onchange = (e) => {
-   const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
+    const input = document.createElement('input');
 
-      base64 = reader.result;
-      cover = base64;
+    input.setAttribute('type', 'file');
+
+    input.setAttribute('accept', 'image/*');
+
+    input.click();
+
+    input.onchange = () => {
+
+      cover = input.files[0];
+
+      const reader = new FileReader();
+
+      reader.readAsDataURL(cover);
+
+      reader.onload = () => resolve(reader.result);
+
+      reader.onerror = error => reject(error);
+
     };
-  }
 
-  input.click();
-
+  })
 }

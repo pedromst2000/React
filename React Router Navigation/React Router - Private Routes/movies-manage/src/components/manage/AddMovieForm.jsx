@@ -44,33 +44,61 @@ function AddMovieForm({ ...props }) {
       };
     }
 
+    // delete cover
+    if (action.type === "DELETE_COVER") {
+      return {
+        ...state,
+        cover: "",
+      };
+    }
+
     return state;
   };
 
   const [formAddMovie, dispatch] = useReducer(reducer, initialState);
 
   const [star, setStar] = useState("");
+    const [message, setMessage] = useState("");
 
   const titleRef = useRef(null);
   const starRef = useRef(null);
 
   useEffect(() => {
     titleRef.current.focus();
-
   }, [titleRef]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newMovie = {
-      ...formAddMovie,
-      id: props.movies.length + 1,
+    const { title, diretor, rate, year, genre, cover, stars, description } =
+      formAddMovie;
+
+      try{
+
+        const response = await props.addMovie(
+          formAddMovie.title,
+          formAddMovie.diretor,
+          formAddMovie.rate,
+          formAddMovie.year,
+          formAddMovie.genre,
+          formAddMovie.cover,
+          formAddMovie.stars,
+          formAddMovie.description
+        );
+
+        setMessage(response);
+
+        dispatch({
+          type: "RESET",
+        });
+        
+      }
+      catch(error){
+        setMessage(error)
+      }
+    
+    
     };
-
-    props.addMovie(newMovie);
-
-    dispatch({ type: "RESET" });
-  };
 
   const addStar = (e) => {
     e.preventDefault();
@@ -85,9 +113,14 @@ function AddMovieForm({ ...props }) {
     starRef.current.focus();
   };
 
-  const handleconvertBase64 =  () => {
-   
-    console.log(convertBase64());
+  const handleconvertBase64 = async () => {
+    const cover = await convertBase64(formAddMovie.cover);
+
+    dispatch({
+      type: "UPDATE",
+      field: "cover",
+      payload: cover,
+    });
   };
 
   return (
@@ -181,21 +214,28 @@ function AddMovieForm({ ...props }) {
       </select>
       <div className="cover-preview">
         <h5>Add the cover of the movie</h5>
-        <CoverPreview
-          cover={formAddMovie.cover}
-        />
+        <CoverPreview cover={formAddMovie.cover} />
       </div>
-      <button className="add-cover-btn"
-        onClick={(e)=>{
+      <button
+        className="add-cover-btn"
+        onClick={(e) => {
           e.preventDefault();
           handleconvertBase64();
-          dispatch({
-            type: "UPDATE",
-            field: "cover",
-            payload: valCover,
-          })
         }}
-      >Add Cover</button>
+      >
+        Add Cover
+      </button>
+      <button
+        className="btn-delete-cover"
+        onClick={(e) => {
+          e.preventDefault();
+          dispatch({
+            type: "DELETE_COVER",
+          });
+        }}
+      >
+        Delete Cover
+      </button>
       <h5>Add the stars of the movie</h5>
       <StarsList
         stars={formAddMovie.stars}
@@ -243,6 +283,11 @@ function AddMovieForm({ ...props }) {
         ></textarea>
       </div>
       <br />
+      <p className={
+        message === "Movie added successfully"
+          ? "success-message"
+          : "error-message"
+      }>{message}</p>
       <button onClick={(e) => handleSubmit(e)} className="add-movie-btn">
         Add Movie
       </button>

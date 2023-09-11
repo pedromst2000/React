@@ -116,3 +116,17 @@ body {
 .btn-add-star{
   cursor: pointer;
 }
+
+.btn-delete-cover{
+  cursor: pointer;
+}
+
+.success-message{
+  color: green;
+  font-size: 0.8rem;
+}
+
+.error-message{
+  color: red;
+  font-size: 1.1rem;
+}

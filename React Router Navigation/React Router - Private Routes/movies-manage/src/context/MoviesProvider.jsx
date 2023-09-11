@@ -28,7 +28,7 @@ export function MoviesProvider({ children }) {
     if (genre === "All") return movies;
 
     return movies.filter(
-      (movie) => movie.Genre.toLowerCase() === genre.toLowerCase()
+      (movie) => movie.Genre === genre
     );
   };
 
@@ -60,22 +60,69 @@ export function MoviesProvider({ children }) {
     setMovies(newMovies);
   };
 
+  const addMovie = (title, diretor, rate, year, genre, cover, stars, description) => {
+    return new Promise((resolve, reject) => {
 
-  const addMovie = (movie) => {
+      const titleExists = movies.some(
+        (movieItem) => movieItem.title === title
+      );
 
-    const newMovie = {
-      ...movie,
-      id: movies.length + 1
-    };
+      const coverExists = movies.some(
+        (movieItem) => movieItem.Cover === cover
+      );
 
+      if (
+        title === "" ||
+        genre === "" ||
+        genre === "Select a genre" ||
+        cover === "" ||
+        diretor === "" ||
+        stars.length === 0 ||
+        description === "" ||
+        rate === 0
+      ) {
+        reject("Please fill all the fields");
+      }
 
-    console.log(newMovie);
+      else if (titleExists) {
+        reject("Title already exists");
+      }
 
+     else if (coverExists) {
+        reject("Cover already exists");
+      }
+
+      else{
+        const newMovie = {
+          id: movies.length + 1,
+          title: title,
+          Director: diretor,
+          Stars: stars,
+          Rate: rate,
+          Year: year,
+          Genre: genre,
+          Cover: cover,
+          Description: description,
+        };
+  
+        setMovies([...movies, newMovie]);
+  
+        resolve("Movie added successfully");
+  
+      }
+    });
   };
 
   return (
     <MoviesContext.Provider
-      value={{ movies, filterMoviesByTitle, filterMoviesByGenre, editGenrerMovie, deleteMovie, addMovie }}
+      value={{
+        movies,
+        filterMoviesByTitle,
+        filterMoviesByGenre,
+        editGenrerMovie,
+        deleteMovie,
+        addMovie,
+      }}
     >
       {children}
     </MoviesContext.Provider>
