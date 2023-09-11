@@ -1,0 +1,23 @@
+[
+    {
+        "id":1,
+        "username":"pedromst",
+        "password":"123pedro",
+        "email": "pedromst@hotmail.com",
+        "role": "client"
+    },
+    {
+        "id":2,
+        "username":"admin",
+        "password":"123admin",
+        "email": "admin@hotmail.com",
+        "role":"admin"
+    },
+    {
+        "id":3,
+        "username": "bot",
+        "password": "bot",
+        "email": "bot@hotmail.com",
+        "role": "unsigned"
+    }
+]
