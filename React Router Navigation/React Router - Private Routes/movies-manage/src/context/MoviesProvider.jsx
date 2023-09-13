@@ -28,7 +28,7 @@ export function MoviesProvider({ children }) {
     if (genre === "All") return movies;
 
     return movies.filter(
-      (movie) => movie.Genre === genre
+      (movie) => movie.Genre.toLowerCase() === genre.toLowerCase()
     );
   };
 
