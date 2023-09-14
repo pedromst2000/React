@@ -5,14 +5,17 @@ function FilterProduct({ ...props }) {
   return (
     <>
       <input
-        onChange={(e) => props.setSearch(e.target.value)}
+        onChange={(e) => 
+          props.setSearch(e.target.value)
+        }
         type="search"
         name="search"
         placeholder="search"
       />
       &nbsp; &nbsp;
       <select
-        onChange={(e) => props.setCategory(e.target.value)}
+        onChange={(e) => props.setCategory(e.target.value)
+        }
         name="category"
       >
         <option value="all">Filter category</option>
@@ -36,7 +39,7 @@ FilterProduct.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
   category: PropTypes.string.isRequired,
-  setCategory: PropTypes.func.isRequired
+  setCategory: PropTypes.func.isRequired,
 };
 
 export default FilterProduct;

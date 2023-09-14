@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import FilterProduct from "./FilterProduct";
 import PropTypes from "prop-types";
 
-
-function FilterForm({...props}) {
-
+function FilterForm({ ...props }) {
   return (
     <>
       <FilterProduct
@@ -17,12 +15,11 @@ function FilterForm({...props}) {
   );
 }
 
-
 FilterForm.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
   category: PropTypes.string.isRequired,
-  setCategory: PropTypes.func.isRequired
+  setCategory: PropTypes.func.isRequired,
 };
 
 export default FilterForm;

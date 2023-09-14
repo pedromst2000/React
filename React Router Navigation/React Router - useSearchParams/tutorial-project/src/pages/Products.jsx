@@ -1,64 +1,28 @@
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import TableProducts from "../components/products/TableProducts";
 import useProductsProvider from "../hooks/useProductsProvider";
 import AddProduct from "../components/products/AddProduct";
 import FilterForm from "../components/products/filter/FilterForm";
-import { useSearchParams } from "react-router-dom";
+import Loading from "../components/Loading";
 
 export default function Products() {
   const { products, dispatch, setProducts } = useProductsProvider();
 
-  // for filter form
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("all");
   const [searchParams, setSearchParams] = useSearchParams();
-  const [isQuerySearch, setIsQuerySearch] = useState(false);
-  const [isQueryCategory, setIsQueryCategory] = useState(false);
 
   const querySearch = searchParams.get("search") || "";
   const queryCategory = searchParams.get("category") || "all";
 
+  const [timeLoading, setTimeLoading] = useState(0);
+
+  // for filter form
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
 
   useEffect(() => {
-    
-    if (querySearch !== "") {
-      setIsQuerySearch(true);
-      setSearch(querySearch);
-    } else {
-      setIsQuerySearch(false);
-      setSearch("");
-    }
-
-    if (queryCategory !== "all") {
-      setIsQueryCategory(true);
-      setCategory(queryCategory);
-    } else {
-      setIsQueryCategory(false);
-      setCategory("all");
-    }
-
-
-  }, [search, category, setSearchParams, isQuerySearch, isQueryCategory]);
-
-
-  const filterProducts = (search, category, isQuerySearch, isQueryCategory) => {
-    return products.filter((product) => {
-      if (isQuerySearch && isQueryCategory) {
-        return (
-          product.name.toLowerCase().includes(search.toLowerCase()) &&
-          product.category === category
-        );
-      } else if (isQuerySearch) {
-        return product.name.toLowerCase().includes(search.toLowerCase());
-      } else if (isQueryCategory) {
-        return product.category === category;
-      } else {
-        return true; // No filters applied
-      }
-    });
-  };
-
-
+    setSearchParams({ search: querySearch, category: queryCategory });
+  }, [querySearch, queryCategory, setSearchParams]);
 
   const handleAddProduct = (...product) => {
     const [name, category] = product;
@@ -143,29 +107,57 @@ export default function Products() {
   };
 
   return (
-    <div className="products-container">
-      <FilterForm
-        search={search}
-        setSearch={setSearch}
-        category={category}
-        setCategory={setCategory}
-      />
-      <br />
-      <br />
-      <TableProducts
-        products={
-          filterProducts(
-            isQuerySearch ? querySearch : search,
-            isQueryCategory ? queryCategory : category,
-            isQuerySearch,
-            isQueryCategory
-          ) || products
-        }
-        handleDelete={handleDelete}
-        handleChange={handleChange}
-      />
-      <br />
-      <AddProduct handleAddProduct={handleAddProduct} />
-    </div>
+    <>
+      {timeLoading < 2 ? (
+        <Loading timeLoading={timeLoading} setTimeLoading={setTimeLoading} />
+      ) : (
+        <div className="products-container">
+          <FilterForm
+            search={search}
+            setSearch={setSearch}
+            category={category}
+            setCategory={setCategory}
+          />
+          <br />
+          <br />
+          <TableProducts
+            products={products.filter((product) => {
+              if (queryCategory === "all" && querySearch === "") return product;
+              if (queryCategory === "all" && querySearch !== "")
+                return product.name
+                  .toLowerCase()
+                  .includes(querySearch.toLowerCase());
+              if (queryCategory !== "all" && querySearch === "")
+                return product.category === queryCategory;
+              if (queryCategory !== "all" && querySearch !== "")
+                return (
+                  product.category === queryCategory &&
+                  product.name.toLowerCase().includes(querySearch.toLowerCase())
+                );
+
+              if (category === "all" && search === "") return product;
+              if (category === "all" && search !== "")
+                return product.name
+                  .toLowerCase()
+                  .includes(search.toLowerCase());
+              if (category !== "all" && search === "")
+                return product.category === category;
+
+              if (category !== "all" && search !== "")
+                return (
+                  product.category === category &&
+                  product.name.toLowerCase().includes(search.toLowerCase())
+                );
+            })}
+            handleDelete={handleDelete}
+            handleChange={handleChange}
+            search={search}
+            category={category}
+          />
+          <br />
+          <AddProduct handleAddProduct={handleAddProduct} />
+        </div>
+      )}
+    </>
   );
 }

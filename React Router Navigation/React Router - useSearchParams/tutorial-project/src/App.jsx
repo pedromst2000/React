@@ -10,6 +10,8 @@ import { AuthProvider } from "./context/AuthProvider";
 import { ProductsProvider } from "./context/ProductsProvider";
 
 function App() {
+ 
+
   return (
     <>
       <AuthProvider>
