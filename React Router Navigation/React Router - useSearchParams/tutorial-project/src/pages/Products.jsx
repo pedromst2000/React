@@ -19,9 +19,18 @@ export default function Products() {
   // for filter form
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+  const [isQueryFilterSearch, setIsQueryFilterSearch] = useState(false);
+  const [isQueryFilterCategory, setIsQueryFilterCategory] = useState(false);
 
   useEffect(() => {
     setSearchParams({ search: querySearch, category: queryCategory });
+
+    if (querySearch !== "") {
+      setIsQueryFilterSearch(true);
+    }
+    if (queryCategory !== "all") {
+      setIsQueryFilterCategory(true);
+    }
   }, [querySearch, queryCategory, setSearchParams]);
 
   const handleAddProduct = (...product) => {
@@ -106,6 +115,24 @@ export default function Products() {
     alert("Category updated successfully");
   };
 
+  const handleFilter = (search, category) => {
+    if (search == "" && category == "all") {
+      return products;
+    } else if (search == "") {
+      return products.filter((product) => product.category === category);
+    } else if (category == "all") {
+      return products.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase())
+      );
+    } else if (search !== "" && category !== "all") {
+      return products.filter(
+        (product) =>
+          product.name.toLowerCase().includes(search.toLowerCase()) &&
+          product.category === category
+      );
+    }
+  };
+
   return (
     <>
       {timeLoading < 2 ? (
@@ -121,34 +148,15 @@ export default function Products() {
           <br />
           <br />
           <TableProducts
-            products={products.filter((product) => {
-              if (queryCategory === "all" && querySearch === "") return product;
-              if (queryCategory === "all" && querySearch !== "")
-                return product.name
-                  .toLowerCase()
-                  .includes(querySearch.toLowerCase());
-              if (queryCategory !== "all" && querySearch === "")
-                return product.category === queryCategory;
-              if (queryCategory !== "all" && querySearch !== "")
-                return (
-                  product.category === queryCategory &&
-                  product.name.toLowerCase().includes(querySearch.toLowerCase())
-                );
-
-              if (category === "all" && search === "") return product;
-              if (category === "all" && search !== "")
-                return product.name
-                  .toLowerCase()
-                  .includes(search.toLowerCase());
-              if (category !== "all" && search === "")
-                return product.category === category;
-
-              if (category !== "all" && search !== "")
-                return (
-                  product.category === category &&
-                  product.name.toLowerCase().includes(search.toLowerCase())
-                );
-            })}
+            products={
+              isQueryFilterSearch && isQueryFilterCategory
+                ? handleFilter(querySearch, queryCategory)
+                : isQueryFilterSearch
+                ? handleFilter(querySearch, category)
+                : isQueryFilterCategory
+                ? handleFilter(search, queryCategory)
+                : handleFilter(search, category)
+              }
             handleDelete={handleDelete}
             handleChange={handleChange}
             search={search}
