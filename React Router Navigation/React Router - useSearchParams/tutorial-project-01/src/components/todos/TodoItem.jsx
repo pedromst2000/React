@@ -1,12 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import categoriesData from "../../data/categories.json";
-import todosData from "../../data/todos.json";
-import useAuthProvider from "../../hooks/useAuthProvider";
+import { Link } from "react-router-dom";
 
 function TodoItem({ ...props }) {
-
-    
   return (
     <tr
       className={
@@ -14,21 +10,57 @@ function TodoItem({ ...props }) {
       }
     >
       <td>{props.todo.task}</td>
-      <td>
+      <td style={{ textAlign: "center" }}>
         {
-          categoriesData.find(
+          props.categories.find(
             (category) => category.id === props.todo.categoryID
           ).category
         }
       </td>
       <td>{props.todo.completed ? "Completed" : "Pending"}</td>
-      <td>{}</td>
+      <td>
+        {props.users.find((user) => user.id === props.todo.creatorID)
+          .username == props.User.username ? (
+          props.todo.completed ? (
+            <>
+              <div className="btns-options">
+                <button className="btn-delete">Delete</button>
+                <button className="btn-pending">Pending</button>
+                <button className="btn-link">
+                  <Link to={`/todos/${props.todo.id}`}>See Details</Link>
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="btns-options">
+                <button className="btn-delete">Delete</button>
+                <button className="btn-finish">Finish</button>
+                <button className="btn-link">
+                  <Link to={`/todos/${props.todo.id}`}>See Details</Link>
+                </button>
+              </div>
+            </>
+          )
+        ) : (
+          <>
+            <div className="btns-options">
+              <button className="btn-link">
+                <Link to={`/todos/${props.todo.id}`}>See Details</Link>
+              </button>
+            </div>
+          </>
+        )}
+      </td>
     </tr>
   );
 }
 
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
+  User: PropTypes.object.isRequired,
 };
 
 export default TodoItem;

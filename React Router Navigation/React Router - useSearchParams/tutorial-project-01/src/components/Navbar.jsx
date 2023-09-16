@@ -17,7 +17,7 @@ export default function Navbar() {
         </li>
         {User.isLogged ? (
           <li>
-            <button
+            <button className="btn-logout"
               onClick={() => {
                 logout();
               }}

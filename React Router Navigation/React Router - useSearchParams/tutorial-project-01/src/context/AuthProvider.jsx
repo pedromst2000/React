@@ -88,7 +88,8 @@ export function AuthProvider({ children }) {
       value={{
         login,
         logout,
-        User
+        User,
+        users
       }}
     >
       {children}

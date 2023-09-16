@@ -56,6 +56,37 @@ form button {
 }
 
 
+button{
+  cursor: pointer;
+}
+
+.table-todos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-todos button{
+  margin-left: 1em;
+}
+
+.table-todos button {
+    border: none;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    transition: all 0.3s ease-in-out;  
+}
+
+/* select the third button */
+.table-todos button a {
+    text-decoration: none;
+    color: #fff;
+  }
+
+.table-todos .btn-link {
+    background-color: rgb(46, 39, 39)
+    };
 
 @keyframes messageAnimation {
   0% {
