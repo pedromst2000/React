@@ -5,7 +5,6 @@ import TodoItem from "./TodoItem";
 function TodosList({ ...props }) {
 
 
-
   return (
     <div className="table-todos">
       <table>
@@ -19,8 +18,8 @@ function TodosList({ ...props }) {
         </thead>
         <tbody>
           {
-
-            props.isAllTodos ? props.allTodos.map((todo) => (
+            props.isAllTodos 
+            ? props.allTodos.map((todo) => (
               <TodoItem
                 key={todo.id}
                 todo={todo}
@@ -38,6 +37,8 @@ function TodosList({ ...props }) {
               />
             ))
 
+
+
 }
         </tbody>
       </table>
@@ -46,7 +47,6 @@ function TodosList({ ...props }) {
 }
 
 TodosList.propTypes = {
-  todos: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
   User: PropTypes.object.isRequired,

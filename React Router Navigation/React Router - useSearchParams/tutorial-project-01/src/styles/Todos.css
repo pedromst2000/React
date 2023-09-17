@@ -1,0 +1,93 @@
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 15%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.table-todos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+}
+
+.table-todos .todo-item-completed {
+  background-color: green;
+  color: #fff;
+}
+
+.table-todos .todo-item-pending {
+  background-color: orange;
+  color: #333;
+  font-weight: bold;
+}
+
+.table-todos button {
+  margin-left: 1em;
+}
+
+.table-todos button {
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.table-todos button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.table-todos .btn-link {
+  background-color: rgb(46, 39, 39);
+}
+
+.btn-selected {
+  background-color: rgb(46, 39, 39);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-unselected {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-form input {
+  border: 1px solid #000;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+}
+
+
+@keyframes messageAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

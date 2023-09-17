@@ -44,57 +44,15 @@ form button {
   animation: messageAnimation 1s ease-in-out;
 }
 
-.todo-item-completed {
-  background-color: green;
-  color: #fff;
-}
-
-.todo-item-pending {
-  background-color: orange;
-  color: #333;
-  font-weight: bold;
-}
-
 
 button{
   cursor: pointer;
 }
 
-.table-todos{
+
+.loading-container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-}
-
-.table-todos button{
-  margin-left: 1em;
-}
-
-.table-todos button {
-    border: none;
-    border-radius: 0.5em;
-    padding: 0.5em;
-    transition: all 0.3s ease-in-out;  
-}
-
-/* select the third button */
-.table-todos button a {
-    text-decoration: none;
-    color: #fff;
-  }
-
-.table-todos .btn-link {
-    background-color: rgb(46, 39, 39)
-    };
-
-@keyframes messageAnimation {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  align-items: center;
+  height: 20vh;
 }
