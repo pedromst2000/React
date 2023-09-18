@@ -119,7 +119,7 @@ export default function Products() {
     if (search == "" && category == "all") {
       return products;
     } else if (search == "") {
-      return products.filter((product) => product.category === category);
+      return products.filter((product) => product.category.toLowerCase() === category.toLowerCase());
     } else if (category == "all") {
       return products.filter((product) =>
         product.name.toLowerCase().includes(search.toLowerCase())
