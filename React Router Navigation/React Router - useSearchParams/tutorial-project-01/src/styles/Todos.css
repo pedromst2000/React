@@ -9,12 +9,13 @@
   margin-right: auto;
 }
 
+
 .table-todos {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2em;
+  padding: 1em;
 }
 
 .table-todos .todo-item-completed {
@@ -42,10 +43,6 @@
 .table-todos button a {
   text-decoration: none;
   color: #fff;
-}
-
-.table-todos .btn-link {
-  background-color: rgb(46, 39, 39);
 }
 
 .btn-selected {
@@ -80,14 +77,126 @@
   padding: 2em;
 }
 
+.btn-delete{
+  background-color: rgb(158, 39, 39);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
 
-@keyframes messageAnimation {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.btn-delete:hover{
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-pending{
+  background-color: rgb(151, 115, 47);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-pending:hover{
+  background-color: rgb(255, 153, 0);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-link{
+  background-color: rgb(75, 75, 75);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-link:hover{
+  background-color: rgb(31, 29, 29);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-finish{
+  background-color: rgb(43, 100, 43);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-finish:hover{
+  background-color: rgb(52, 146, 52);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-add-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-add-link{
+  background-color: rgb(46, 39, 39);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+  padding: 0.8em;
+  width: 15%;
+}
+
+.btn-add-link a{
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-add-link:hover{
+  background-color: rgb(82, 78, 78);
+  color: #fff;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  transition: all 0.3s ease-in-out;
+  padding: 0.8em;
+  width: 15%;
+
+}
+
+.content-add-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  flex-wrap: wrap;
+}
+
+
+.todo-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+  padding: 2em;
 }

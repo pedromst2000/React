@@ -24,8 +24,15 @@ function TodoItem({ ...props }) {
           props.todo.completed ? (
             <>
               <div className="btns-options">
-                <button className="btn-delete">Delete</button>
-                <button className="btn-pending">Pending</button>
+                <button
+                  onClick={() => props.handleDeleteTodo(props.todo.id)}
+                  className="btn-delete"
+                >
+                  Delete
+                </button>
+                <button 
+                  onClick={() => props.handleUpdateTodo(props.todo.id)}
+                className="btn-pending">Pending</button>
                 <button className="btn-link">
                   <Link to={`/todos/${props.todo.id}`}>See Details</Link>
                 </button>
@@ -34,8 +41,15 @@ function TodoItem({ ...props }) {
           ) : (
             <>
               <div className="btns-options">
-                <button className="btn-delete">Delete</button>
-                <button className="btn-finish">Finish</button>
+                <button
+                  onClick={() => props.handleDeleteTodo(props.todo.id)}
+                  className="btn-delete"
+                >
+                  Delete
+                </button>
+                <button 
+                  onClick={() => props.handleUpdateTodo(props.todo.id)}
+                className="btn-finish">Finish</button>
                 <button className="btn-link">
                   <Link to={`/todos/${props.todo.id}`}>See Details</Link>
                 </button>
@@ -61,6 +75,8 @@ TodoItem.propTypes = {
   categories: PropTypes.array.isRequired,
   users: PropTypes.array.isRequired,
   User: PropTypes.object.isRequired,
+  handleDeleteTodo: PropTypes.func.isRequired,
+  handleUpdateTodo: PropTypes.func.isRequired,
 };
 
 export default TodoItem;

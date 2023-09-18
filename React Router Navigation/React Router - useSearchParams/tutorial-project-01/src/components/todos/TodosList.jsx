@@ -26,6 +26,8 @@ function TodosList({ ...props }) {
                 categories={props.categories}
                 users={props.users}
                 User={props.User}
+                handleDeleteTodo={props.handleDeleteTodo}
+                handleUpdateTodo={props.handleUpdateTodo}
               />
             )) : props.myTodos.map((todo) => (
               <TodoItem
@@ -34,6 +36,8 @@ function TodosList({ ...props }) {
                 categories={props.categories}
                 users={props.users}
                 User={props.User}
+                handleDeleteTodo={props.handleDeleteTodo}
+                handleUpdateTodo={props.handleUpdateTodo}
               />
             ))
 
@@ -54,6 +58,8 @@ TodosList.propTypes = {
   isMyTodos: PropTypes.bool.isRequired,
   myTodos: PropTypes.array.isRequired,
   allTodos: PropTypes.array.isRequired,
+  handleDeleteTodo: PropTypes.func.isRequired,
+  handleUpdateTodo: PropTypes.func.isRequired,
 };
 
 export default TodosList;

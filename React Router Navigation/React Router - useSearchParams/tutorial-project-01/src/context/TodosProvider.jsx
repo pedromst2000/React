@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useReducer, useState } from "react";
 import todosData from "../data/todos.json";
 import categoriesData from "../data/categories.json";
 
-
 const TodosContext = createContext({});
 
 export function TodosProvider({ children }) {
@@ -17,39 +16,43 @@ export function TodosProvider({ children }) {
 
   const TodosReducer = (state, action) => {
     switch (action.type) {
+     
       case "ADD_TODO":
-        return [
-          setTodos([
-            ...state,
-            {
-              id: state.length + 1,
-              task: action.payload.task,
-              completed: false,
-              categoryID: action.payload.categoryID,
-              creatorID: action.payload.creatorID,
-            },
-          ]),
+        return [...state, 
+            setTodos((prevTodos) => [
+              ...prevTodos,
+              {
+                id: prevTodos.length + 1,
+                task: action.payload.task,
+                categoryID: action.payload.categoryID,
+                creatorID: action.payload.creatorID,
+                completed: false,
+              },
+            ])
         ];
-
       case "DELETE_TODO":
-        return [
-          setTodos(state.filter((todo) => todo.id !== action.payload.id)),
-        ];
-
+        return[
+          ...state,
+          setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== action.payload.id))
+        ] 
       case "UPDATE_TODO":
         return [
-          //  update the status
-          setTodos(
-            state.map((todo) =>
-              todo.id === action.payload.id
-                ? { ...todo, completed: !todo.completed }
-                : todo
-            )
+          ...state,
+          setTodos((prevTodos) =>
+            prevTodos.map((todo) => {
+              if (todo.id === action.payload.id) {
+                return {
+                  ...todo,
+                  completed: !todo.completed,
+                };
+              }
+              return todo;
+            })
           ),
-        ];
-
+        ]
       default:
         return state;
+
     }
   };
 
@@ -87,7 +90,7 @@ const myTodos = (User, users) => {
 };
 
   return (
-    <TodosContext.Provider value={{ todos, dispatch, categoriesTodos, allTodos, myTodos }}>
+    <TodosContext.Provider value={{todos, state, dispatch, categoriesTodos, allTodos, myTodos }}>
       {children}
     </TodosContext.Provider>
   );
