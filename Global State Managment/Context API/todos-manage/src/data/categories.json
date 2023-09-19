@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "category": "Work"
+    },
+    {
+        "id": 2,
+        "category": "Personal or Self Development"
+    },
+    {
+        "id": 3,
+        "category": "Health and Fitness"
+    },
+    {
+        "id": 4,
+        "category": "Financial"
+    },
+    {
+        "id": 5,
+        "category": "Social and Relationships"
+    }
+
+]

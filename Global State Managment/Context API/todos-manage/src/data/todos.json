@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1,
+        "task": "Practice JavaScript",
+        "completed": true,
+        "categoryID": 2,
+        "creatorID": 1
+    },
+    {
+        "id": 2,
+        "task": "Meditate for 10 minutes",
+        "completed": false,
+        "categoryID": 3,
+        "creatorID": 2 
+    },
+    {
+        "id": 3,
+        "task": "Go for a walk",
+        "completed": false,
+        "categoryID": 3,
+        "creatorID": 2
+    },
+    {
+        "id":4,
+        "task": "Work on a project",
+        "completed": true,
+        "categoryID": 1,
+        "creatorID": 1
+    },
+    {
+        "id": 5,
+        "task": "Read a book",
+        "completed": true,
+        "categoryID": 2,
+        "creatorID": 2
+    },
+    {
+        "id": 6,
+        "task": "Talk to a girl you like in the college",
+        "completed": false,
+        "categoryID": 5,
+        "creatorID": 1
+    },
+    {
+        "id": 7,
+        "task": "Manage the bills",
+        "completed": false,
+        "categoryID": 4,
+        "creatorID": 1
+    }
+]
