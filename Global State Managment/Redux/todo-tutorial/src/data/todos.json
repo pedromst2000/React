@@ -1,0 +1,26 @@
+[
+    {
+        "id":1,
+        "task": "work on project",
+        "completed": false,
+        "category": "work"
+    },
+    {
+        "id":2,
+        "task": "read a book",
+        "completed": false,
+        "category": "personal"
+    },
+    {
+        "id":3,
+        "task": "go to the gym",
+        "completed": true,
+        "category": "personal"
+    },
+    {
+        "id":4,
+        "task": "practice coding",
+        "completed": false,
+        "category": "work"
+    }
+]
