@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "task": "work on project",
+        "completed": false,
+        "category": "work"
+    },
+    {
+        "id": 2,
+        "task": "play guitar",
+        "completed": true,
+        "category": "hobby"
+    },
+    {
+        "id": 3,
+        "task": "go to gym",
+        "completed": false,
+        "category": "health"
+    },
+    {
+        "id":4,
+        "task": "go to the store",
+        "completed": false,
+        "category": "shopping"
+    },
+    {
+        "id" :5,
+        "task": "practice JavaScript",
+        "completed": true,
+        "category": "work"
+    }
+]
