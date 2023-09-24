@@ -10,7 +10,7 @@ function App() {
   const dispatch = useDispatch();
 
   const [searchTodo, setSearchTodo] = useState("");
-  // const [filterCategory, setFilterCategory] = useState("all");
+  const [filterCategory, setFilterCategory] = useState("all");
 
   useEffect(() => {
     console.log(todos);
@@ -20,12 +20,20 @@ function App() {
     <>
       <FilterTodos
         setSearchTodo={setSearchTodo}
-        // setFilterCategory={setFilterCategory}
+        setFilterCategory={setFilterCategory}
       />
       <Todos
-        todos={todos.filter((todo) =>
-          todo.task.toLowerCase().includes(searchTodo.toLowerCase())
-        )}
+        todos={
+          filterCategory === "all"
+            ? todos.filter((todo) =>
+                todo.task.toLowerCase().includes(searchTodo.toLowerCase())
+              )
+            : todos
+                .filter((todo) => todo.category === filterCategory)
+                .filter((todo) =>
+                  todo.task.toLowerCase().includes(searchTodo.toLowerCase())
+                )  
+        }
         dispatch={dispatch}
         actions={todosActions}
       />
