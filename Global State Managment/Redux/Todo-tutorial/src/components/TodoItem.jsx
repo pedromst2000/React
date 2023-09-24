@@ -1,25 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function TodoItem({...props}) {
+function TodoItem({todo, deleteTodo, updateTodo}) {
   return (
     <tr>
-        <td>{props.todo.task}</td>
-        <td>{props.todo.completed ? "Finished" : "Pending"}</td>
-        <td>{props.todo.category}</td>
+        <td>{todo.task}</td>
+        <td>{todo.category}</td>
+        <td>{todo.completed ? 'Completed' : 'Pending'}</td>
         <td>
             <button
-                onClick={() => props.handleDeleteTodo(props.todo)}
+                onClick={() => updateTodo(todo.id, !todo.completed)}
+            >
+                {todo.completed ? 'Mark Pending' : 'Mark Completed'}
+            </button>
+            &nbsp;
+            <button
+                onClick={() => deleteTodo(todo.id)}
             >
                 Delete
-            </button>
-            &ensp;
-            <button
-                onClick={() => props.handleUpdateTodo(props.todo)}
-            >
-                {
-                    props.todo.completed ? "Mark as Pending" : "Mark as Finished"
-                }
             </button>
         </td>
     </tr>
@@ -28,8 +26,8 @@ function TodoItem({...props}) {
 
 TodoItem.propTypes = {
     todo: PropTypes.object.isRequired,
-    handleDeleteTodo: PropTypes.func.isRequired,
-    handleUpdateTodo: PropTypes.func.isRequired,
+    deleteTodo: PropTypes.func.isRequired,
+    updateTodo: PropTypes.func.isRequired,
 }
 
 export default TodoItem

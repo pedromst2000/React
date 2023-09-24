@@ -1,32 +1,32 @@
 [
     {
         "id": 1,
-        "task": "work on project",
+        "task": "do the dishes",
         "completed": false,
-        "category": "work"
+        "category": "chores"
     },
     {
         "id": 2,
-        "task": "play guitar",
-        "completed": true,
-        "category": "hobby"
+        "task": "walk the dog",
+        "completed": false,
+        "category": "chores"
     },
     {
         "id": 3,
-        "task": "go to gym",
-        "completed": false,
+        "task": "practice coding",
+        "completed": true,
+        "category": "work"
+    },
+    {
+        "id": 4,
+        "task": "go to the gym",
+        "completed": true,
         "category": "health"
     },
     {
-        "id":4,
-        "task": "go to the store",
+        "id": 5,
+        "task": "practice guitar",
         "completed": false,
-        "category": "shopping"
-    },
-    {
-        "id" :5,
-        "task": "practice JavaScript",
-        "completed": true,
-        "category": "work"
+        "category": "hobby"
     }
 ]
