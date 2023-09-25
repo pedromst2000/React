@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import todosData from "../data/todos.json";
 
-// Load todos from localStorage or use an empty array as the initial state
+// Load todos from localStorage
 const todos = JSON.parse(localStorage.getItem("todos")) || todosData;
 
 export const todosSlice = createSlice({
