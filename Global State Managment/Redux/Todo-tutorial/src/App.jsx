@@ -6,23 +6,27 @@ import Todos from "./components/Todos";
 import AddTodo from "./components/AddTodo";
 
 function App() {
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.todos.todos);
   const dispatch = useDispatch();
 
   const [searchTodo, setSearchTodo] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
 
   useEffect(() => {
+   
     console.log(todos);
+
+    localStorage.setItem("todos", JSON.stringify(todos));
+
   }, [todos]);
 
   return (
     <>
-      <FilterTodos
+       <FilterTodos
         setSearchTodo={setSearchTodo}
         setFilterCategory={setFilterCategory}
-      />
-      <Todos
+      /> 
+       <Todos
         todos={
           filterCategory === "all"
             ? todos.filter((todo) =>
@@ -32,12 +36,12 @@ function App() {
                 .filter((todo) => todo.category === filterCategory)
                 .filter((todo) =>
                   todo.task.toLowerCase().includes(searchTodo.toLowerCase())
-                )  
+                )
         }
         dispatch={dispatch}
         actions={todosActions}
       />
-      <AddTodo dispatch={dispatch} actions={todosActions} todos={todos} />
+      <AddTodo dispatch={dispatch} actions={todosActions} todos={todos} /> 
     </>
   );
 }
