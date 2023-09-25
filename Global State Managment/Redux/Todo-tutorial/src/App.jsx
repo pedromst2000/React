@@ -12,13 +12,6 @@ function App() {
   const [searchTodo, setSearchTodo] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
 
-  useEffect(() => {
-   
-    console.log(todos);
-
-    localStorage.setItem("todos", JSON.stringify(todos));
-
-  }, [todos]);
 
   return (
     <>
