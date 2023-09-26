@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "task": "Complete project proposal",
+        "categoryID": 1,
+        "completed": false,
+        "description": "Finish the project proposal for the upcoming client presentation.",
+        "creatorID": 1
+    },
+    {
+        "id": 2,
+        "task": "Buy groceries",
+        "categoryID": 2,
+        "completed": true,
+        "description": "Purchase groceries for the week, including fruits, vegetables, and household items.",
+        "creatorID": 2
+    },
+    {
+        "id": 3,
+        "task": "Read a book",
+        "categoryID": 2,
+        "completed": false,
+        "description": "Read the novel 'The Great Gatsby' for personal enjoyment.",
+        "creatorID": 2
+    },
+    {
+        "id": 4,
+        "task": "Attend team meeting",
+        "categoryID": 1,
+        "completed": true,
+        "description": "Participate in the weekly team meeting to discuss project progress.",
+        "creatorID": 1
+    },
+    {
+        "id": 5,
+        "task": "Go for a run",
+        "categoryID": 3,
+        "completed": false,
+        "description": "Go for a 30-minute run to maintain physical fitness.",
+        "creatorID": 1
+    },
+    {
+        "id": 6,
+        "task": "Prepare presentation",
+        "categoryID": 1,
+        "completed": false,
+        "description": "Prepare a PowerPoint presentation for the client meeting.",
+        "creatorID": 2
+      },
+      {
+        "id": 7,
+        "task": "Call mom",
+        "categoryID": 2,
+        "completed": false,
+        "description": "Call your mom to catch up and see how she's doing.",
+        "creatorID": 2
+      },
+      {
+        "id": 8,
+        "task": "Write a blog post",
+        "categoryID": 1,
+        "completed": false,
+        "description": "Prepare a PowerPoint presentation for the client meeting.",
+        "creatorID": 2
+      },
+      {
+        "id": 9,
+        "task": "Exercise for 30 minutes",
+        "categoryID": 3,
+        "completed": true,
+        "description": "Engage in a 30-minute workout routine to stay active and healthy.",
+        "creatorID": 1
+      },
+      {
+        "id": 10,
+        "task": "Review project timeline",
+        "categoryID": 1,
+        "completed": true,
+        "description": "Review and update the project timeline to ensure deadlines are met.",
+        "creatorID": 1
+      }
+]

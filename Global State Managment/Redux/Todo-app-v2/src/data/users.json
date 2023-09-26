@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "username": "pedromst",
+        "password": "123pedro",
+        "email": "pedromst@hotmail.com",
+        "role": "regular"
+    },
+    {
+        "id": 2,
+        "username": "rita",
+        "password": "123rita",
+        "email": "rita@hotmail.com",
+        "role": "regular"
+    },
+    {
+        "id": 3,
+        "username": "admin",
+        "password": "123admin",
+        "email": "admin@hotmail.com",
+        "role": "admin"
+    },
+    {
+        "id": 4,
+        "username": "bot",
+        "password" : "123bot",
+        "email": "bot@hotmail.com",
+        "role": "unsigned"
+    }
+]
