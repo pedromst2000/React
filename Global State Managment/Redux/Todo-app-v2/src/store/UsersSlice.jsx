@@ -10,7 +10,7 @@ const users = localStorage.getItem("users")
 const loggedUser = sessionStorage.getItem("loggedUser")
   ? JSON.parse(sessionStorage.getItem("loggedUser"))
   : {
-      username: "",
+      username: "pedromst",
       role: "regular",
       isLogged: true,
     };
@@ -39,13 +39,19 @@ export const usersSlice = createSlice({
         } else {
           const loggedUser = state.users.find((user) => user.email === email);
 
-          state.User.username = loggedUser.username;
-          state.User.role = loggedUser.role;
-          state.User.isLogged = true;
+          const newUserlogged = {
+            ...state,
+            User: {
+              username: loggedUser.username,
+              role: loggedUser.role,
+              isLogged: true,
+            },
+          }
 
-          localStorage.setItem("loggedUser", JSON.stringify(state.User));
+          sessionStorage.setItem("loggedUser", JSON.stringify(newUserlogged.User));
 
-          return state.User;
+          return newUserlogged;
+
         }
       } catch (error) {
         if (error) {
@@ -103,15 +109,19 @@ export const usersSlice = createSlice({
 
       const { username, role, isLogged } = action.payload;
 
-      state.User.username = username;
-      state.User.role = role;
-      state.User.isLogged = isLogged;
+      const newState = {
+        ...state,
+        User: {
+          username: username,
+          role: role,
+          isLogged: isLogged,
+        },
+      }
 
-      sessionStorage.removeItem("loggedUser");
-
-      return state.User;
+      sessionStorage.setItem("loggedUser", JSON.stringify(newState.User));
 
 
+      return newState;
     },
   },
 });

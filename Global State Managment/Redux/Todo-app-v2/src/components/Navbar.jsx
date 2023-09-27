@@ -14,6 +14,13 @@ export default function Navbar() {
 
     }, [User]);
 
+    const handleLogout = () => {
+      dispatch(authActions.logout({
+        username: "",
+        role: "",
+        isLogged: false,
+      }));
+    };
 
   return (
     <nav>
@@ -31,9 +38,7 @@ export default function Navbar() {
               User.isLogged ? 
               <li
                 onClick={() => {
-                  dispatch(authActions.logout(
-                    
-                  ));
+                  handleLogout();
                 }}
               >
                 <button>
