@@ -2,9 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import todosData from "../data/todos.json";
 
 // persisting data with localStorage
-const todos = localStorage.getItem("todos")
-  ? JSON.parse(localStorage.getItem("todos"))
-  : todosData;
+const todos = localStorage.getItem("todos") === null ? 
+localStorage.setItem("todos", JSON.stringify(todosData)) : JSON.parse(localStorage.getItem("todos"));
 
 export const todosSlice = createSlice({
   name: "todos",
@@ -29,6 +28,8 @@ export const todosSlice = createSlice({
 
       // updating the state in localStorage
       localStorage.setItem("todos", JSON.stringify(state.todos));
+
+      return state;
     },
     // Update
     toggleCompleteTodo: (state, action) => {
@@ -36,21 +37,28 @@ export const todosSlice = createSlice({
 
       const todo = state.todos.find((todo) => todo.id === id);
 
-      if (todo) {
-        todo.completed = status;
-      }
-
+      state.todos = [
+        ...state.todos.filter((todo) => todo.id !== id),
+        {
+          ...todo,
+          completed: status,
+        },
+      ];
       // updating the state in localStorage
       localStorage.setItem("todos", JSON.stringify(state.todos));
+
+      return state;
     },
     // Delete
     deleteTodo: (state, action) => {
       const { id } = action.payload; // action.payload.id
 
-      state.todos = state.todos.filter((todo) => todo.id !== id);
-
-      // update the state
+      state.todos = [...state.todos.filter((todo) => todo.id !== id)];
+    
+      // updating the state in localStorage
       localStorage.setItem("todos", JSON.stringify(state.todos));
+      
+      return state;
     },
   },
 });

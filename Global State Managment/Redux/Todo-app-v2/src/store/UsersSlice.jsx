@@ -1,19 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 import usersData from "../data/users.json";
-import { checkEmail } from "../utils/checkEmail";
 
 // persisting data with localStorage
-const users = localStorage.getItem("users")
-  ? JSON.parse(localStorage.getItem("users"))
-  : usersData;
+const users =
+  localStorage.getItem("users") === null
+    ? localStorage.setItem("users", JSON.stringify(usersData))
+    : JSON.parse(localStorage.getItem("users"));
 
-const loggedUser = sessionStorage.getItem("loggedUser")
-  ? JSON.parse(sessionStorage.getItem("loggedUser"))
-  : {
-      username: "pedromst",
-      role: "regular",
-      isLogged: true,
-    };
+// persisting the state of the user
+const loggedUser =
+  sessionStorage.getItem("loggedUser") === null
+    ? sessionStorage.setItem(
+        "loggedUser",
+        JSON.stringify({
+          username: "",
+          role: "",
+          isLogged: false,
+        })
+      )
+    : JSON.parse(sessionStorage.getItem("loggedUser"));
 
 export const usersSlice = createSlice({
   name: "users",
@@ -25,88 +30,52 @@ export const usersSlice = createSlice({
   // state and actions
   reducers: {
     login: (state, action) => {
-      const { email, password } = action.payload;
+      const { username, role, isLogged } = action.payload;
 
-      try {
-        if (email == "" || password == "")
-          throw new Error("Please fill all fields");
+      const newLoggedUser = {
+        ...state,
+        User: {
+          username: username,
+          role: role,
+          isLogged: isLogged,
+        },
+      };
 
-        if (!checkEmail(email)) throw new Error("Invalid email");
-        else if (state.users.some((user) => user.email !== email)) {
-          throw new Error("Email not found");
-        } else if (state.users.some((user) => user.password !== password)) {
-          throw new Error("Incorrect password");
-        } else {
-          const loggedUser = state.users.find((user) => user.email === email);
+      sessionStorage.setItem("loggedUser", JSON.stringify(newLoggedUser.User));
 
-          const newUserlogged = {
-            ...state,
-            User: {
-              username: loggedUser.username,
-              role: loggedUser.role,
-              isLogged: true,
-            },
-          }
-
-          sessionStorage.setItem("loggedUser", JSON.stringify(newUserlogged.User));
-
-          return newUserlogged;
-
-        }
-      } catch (error) {
-        if (error) {
-          return error.message;
-        }
-      }
+      return newLoggedUser;
     },
+
     register: (state, action) => {
       const { username, email, password } = action.payload;
 
-      try {
-        if (username == "" || email == "" || password == "")
-          throw new Error("Please fill all fields");
-        else if (
-          state.users.some(
-            (user) => user.username.toLowerCase() === username.toLowerCase()
-          )
-        ) {
-          throw new Error("Username already exists");
-        } else if (!checkEmail(email)) throw new Error("Invalid email");
-        else if (
-          state.users.some(
-            (user) => user.email.toLowerCase() === email.toLowerCase()
-          )
-        ) {
-          throw new Error("Email already exists");
-        } else if (
-          state.users.some(
-            (user) => user.email.toLowerCase() === email.toLowerCase()
-          )
-        ) {
-          throw new Error("Email already exists");
-        } else {
-          const newUser = {
-            id: state.users.length + 1,
-            username: username,
-            email: email,
-            password: password,
-            role: "user",
-          };
+      const newUser = {
+        User: {
+          username: username,
+          role: "unsigned",
+          isLogged: true,
+        },
+        newUser: {
+          id: state.users.length + 1,
+          username: username,
+          email: email,
+          password: password,
+          role: "unsigned",
+        },
+      };
 
-          state.users = [...state.users, newUser];
+      const newUsers = {
+        ...state,
+        users: [...state.users, newUser.newUser],
+        User: newUser.User,
+      };
 
-            localStorage.setItem("users", JSON.stringify(state.users));
+      localStorage.setItem("users", JSON.stringify(newUsers.users));
+      sessionStorage.setItem("loggedUser", JSON.stringify(newUsers.User));
 
-            return newUser;
-        }
-      } catch (error) {
-        if (error) {
-          return error.message;
-        }
-      }
+      return newUsers;
     },
     logout: (state, action) => {
-
       const { username, role, isLogged } = action.payload;
 
       const newState = {
@@ -116,15 +85,32 @@ export const usersSlice = createSlice({
           role: role,
           isLogged: isLogged,
         },
-      }
+      };
 
       sessionStorage.setItem("loggedUser", JSON.stringify(newState.User));
 
+      return newState;
+    },
+
+    changePassword: (state, action) => {
+      const { newPassword } = action.payload;
+   
+      const newState = {
+        ...state,
+        users: state.users.map((user) =>
+          user.username === state.User.username
+              // will change the password of the logged user
+            ? { ...user, password: newPassword }
+            : user // will return the rest of the users
+        ),
+      };
+
+      localStorage.setItem("users", JSON.stringify(newState.users));
 
       return newState;
+  
     },
   },
 });
-
 
 export const authActions = usersSlice.actions;

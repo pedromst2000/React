@@ -1,0 +1,12 @@
+.auth-link:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.message-success{
+    color: green;
+}
+
+.message-error{
+    color: red;
+}

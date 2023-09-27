@@ -2,9 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 import categoriesData from "../data/categories.json";
 
 // persisting data with localStorage
-const categories = localStorage.getItem("categories")
-  ? JSON.parse(localStorage.getItem("categories"))
-  : categoriesData;
+const categories =
+  localStorage.getItem("categories") === null
+    ? localStorage.setItem("categories", JSON.stringify(categoriesData))
+    : JSON.parse(localStorage.getItem("categories"));
 
 export const categoriesSlice = createSlice({
   name: "categories",

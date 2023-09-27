@@ -9,9 +9,12 @@ import Authentication from "./pages/Authentication";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
+// logic components
 import IsAuthenticated from "./components/IsAuthenticated";
+import IsLogged from "./components/IsLogged";
 
 function App() {
+  
   return (
     <>
       <Router>
@@ -34,9 +37,12 @@ function App() {
             <Route path="/manage" element={<Manage />} />
             </Route>
 
+              {/* if the user is already auhtenticated prevent to acess this route */}
+              <Route element={<IsLogged />}>
             <Route path="/authentication" element={<Authentication />} />
-            
-            <Route element={<IsAuthenticated roles={["admin", "regular"]} />}>
+            </Route>
+
+            <Route element={<IsAuthenticated roles={["admin", "regular", "unsigned"]} />}>
             <Route path="/profile" element={<Profile />} />
             </Route>
 
