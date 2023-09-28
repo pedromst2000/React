@@ -9,9 +9,9 @@ function IsAuthenticated({ roles }) {
 
   return (
     <>
-      {User.isLogged && roles.includes(User.role) ? (
+      {User?.isLogged && roles.includes(User?.role) ? (
         <Outlet />
-      ) : User.isLogged && !roles.includes(User.role) ? (
+      ) : User?.isLogged && !roles.includes(User?.role) ? (
         <Navigate to="/" />
       ) : (
         <Navigate

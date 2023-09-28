@@ -29,6 +29,7 @@ export const usersSlice = createSlice({
 
   // state and actions
   reducers: {
+
     login: (state, action) => {
       const { username, role, isLogged } = action.payload;
 
@@ -95,20 +96,25 @@ export const usersSlice = createSlice({
     changePassword: (state, action) => {
       const { newPassword } = action.payload;
    
+      const newUsers = state.users.map((user) => {
+        if (user.username === state.User.username) {
+          return {
+            ...user,
+            password: newPassword,
+          };
+        } else {
+          return user;
+        }
+      });
+
       const newState = {
         ...state,
-        users: state.users.map((user) =>
-          user.username === state.User.username
-              // will change the password of the logged user
-            ? { ...user, password: newPassword }
-            : user // will return the rest of the users
-        ),
+        users: newUsers,
       };
-
+  
       localStorage.setItem("users", JSON.stringify(newState.users));
 
-      return newState;
-  
+      return newState
     },
   },
 });

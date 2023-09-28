@@ -12,7 +12,8 @@ export const todosSlice = createSlice({
   },
   // state and actions
   reducers: {
-    // Add - Create
+
+   // Add - Create
     addTodo: (state, action) => {
       // body
       const newTodo = {
@@ -35,19 +36,18 @@ export const todosSlice = createSlice({
     toggleCompleteTodo: (state, action) => {
       const { id, status } = action.payload; // action.payload.id, action.payload.status
 
-      const todo = state.todos.find((todo) => todo.id === id);
-
+      // update the status of the todo
       state.todos = [
-        ...state.todos.filter((todo) => todo.id !== id),
-        {
-          ...todo,
-          completed: status,
-        },
+        ...state.todos.map((todo) =>
+          todo.id === id ? { ...todo, completed: status } : todo
+        ),
       ];
-      // updating the state in localStorage
+
       localStorage.setItem("todos", JSON.stringify(state.todos));
 
       return state;
+
+
     },
     // Delete
     deleteTodo: (state, action) => {
@@ -65,3 +65,5 @@ export const todosSlice = createSlice({
 
 // actions
 export const todosActions = todosSlice.actions;
+
+

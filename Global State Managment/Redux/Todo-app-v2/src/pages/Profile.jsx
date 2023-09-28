@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/UsersSlice";
 
+
 export default function Profile() {
   const dispatch = useDispatch();
   const User = useSelector((state) => state.users.User);
@@ -9,17 +10,49 @@ export default function Profile() {
   const todos = useSelector((state) => state.todos.todos);
 
   useEffect(() => {
-    console.log(todos);
+
+    console.log(User);
+
+  const loggedUserID = users?.find((user) => user.username === User?.username).id;
+
+  const filterLoggedTodosCompleted = todos?.filter((todo) => todo.creatorID === loggedUserID && todo.completed === true);
+
+    const filterLoggedTodosPending = todos?.filter((todo) => todo.creatorID === loggedUserID && todo.completed === false);
+
+  console.log(`Tasks completed: ${filterLoggedTodosCompleted.length}`);
+
+  console.log(`Tasks pending: ${filterLoggedTodosPending.length}`);
+
 
   }, [User, todos]);
+
+
+  const handleChangePassword = () => {
+
+    const newPassword = prompt("Enter your new password");
+
+    if(newPassword == null){
+        return;
+    }
+
+    if( newPassword == ""){
+        alert("Please enter a valid password");
+        return;
+    }
+
+    else {
+        dispatch(authActions.changePassword({ newPassword: newPassword}));
+    }
+  
+  };
 
 
   return (
     <div className="profile-container">
       <h2>My Profile</h2>
       <div className="profile-info">
-        {users.map((user) => {
-          if (user.username === User.username) {
+        {users?.map((user) => {
+          if (user.username === User?.username) {
             return (
               <div key={user.id}>
                 <p> <b>Username:</b> {user.username}</p>
@@ -31,10 +64,36 @@ export default function Profile() {
         })}
       </div>
       <div className="profile-actions">
-        {/* modal for changing the password */}
+        <button
+          onClick={() => {
+            handleChangePassword();
+          }}
+        >
+          Change Password
+        </button>
       </div>
         <div className="todos-static">
-            {/* todo static with all todos, completed todos, pending todos */}
+          <p><b>Total Tasks: </b> 
+            {users?.map((user) => {
+              if (user.username === User?.username) {
+                return todos?.filter((todo) => todo.creatorID === user.id).length;
+              }
+            })}
+          </p>
+          <p><b>Tasks Completed: </b> 
+            {users?.map((user) => {
+              if (user.username === User?.username) {
+                return todos?.filter((todo) => todo.creatorID === user.id && todo.completed == true).length;
+              }
+            })}
+          </p>
+          <p><b>Tasks Pending: </b> 
+            {users?.map((user) => {
+              if (user.username === User?.username) {
+                return todos?.filter((todo) => todo.creatorID === user.id && todo.completed == false).length;
+              }
+            })}
+          </p>
         </div>
         </div>
   );

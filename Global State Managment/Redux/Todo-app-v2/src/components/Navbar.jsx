@@ -8,13 +8,7 @@ export default function Navbar() {
   const User = useSelector((state) => state.users.User); // get User state
   const dispatch = useDispatch(); // actions
   
-    useEffect(() => {
-
-      console.log(User);
-
-    }, [User]);
-
-    const handleLogout = () => {
+  const handleLogout = () => {
       dispatch(authActions.logout({
         username: "",
         role: "",
@@ -29,13 +23,13 @@ export default function Navbar() {
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/todos">Todos</NavLink></li>
             {
-              User.role === "admin" ? <li><NavLink to="/manage">Manage</NavLink></li> : null
+             User?.isLogged && User?.role === "admin" ? <li><NavLink to="/manage">Manage</NavLink></li> : null
             }
               {
-                User.isLogged ? <li><NavLink to="/profile">Profile</NavLink></li> : null
+                User?.isLogged ? <li><NavLink to="/profile">Profile</NavLink></li> : null
               }
             {
-              User.isLogged ? 
+              User?.isLogged ? 
               <li
                 onClick={() => {
                   handleLogout();

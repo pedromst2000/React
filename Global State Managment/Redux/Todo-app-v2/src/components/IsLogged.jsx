@@ -10,7 +10,7 @@ export default function IsLogged() {
     return (
         <>
         {
-            User.isLogged && location.pathname === "/authentication" ? <Navigate to="/" /> : <Outlet />
+            User?.isLogged && location.pathname === "/authentication" ? <Navigate to="/" /> : <Outlet />
         }
         </>
         )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { authActions } from '../store/UsersSlice'
@@ -12,14 +12,6 @@ export default function Login({isClicked, setIsClicked}) {
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
-
-    // debug purposes
-    // useEffect(() => {
-    //     console.log(User);
-    //     console.log(users);
-
-    // }, [User, users]);
-
   
     const handleLogin =  (email, password) => {
 
