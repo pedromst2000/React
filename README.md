@@ -64,17 +64,7 @@ Done. Now run:
 * **src**: Contains all the source code of the project
 
 --------------------------------------------------------------
- 
- ## React projects :
 
-  ## `ReatFacts`
-
-  This project has delevoped with the purpose of learning the basics of React, so it´s a static project, with some facts about React.
-
-  - [repo link](https://github.com/pedromst2000/ReactFacts)
-  - [deploy](https://reactfactsjs.netlify.app/)
-
- 
 
 
 
