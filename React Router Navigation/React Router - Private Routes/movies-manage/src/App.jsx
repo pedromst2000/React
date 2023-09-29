@@ -34,7 +34,7 @@ function App() {
         <Route path="/movies">
           <Route index element={<Movies/>} />
           {/* private route */}
-          <Route element={<RequiresAuth allowedRoles={["admin", "client"]} />}>
+          <Route element={<RequiresAuth allowedRoles={["admin", "regular"]} />}>
           <Route path=":id" element={<Movie />} />
           </Route>
         </Route>
@@ -45,7 +45,7 @@ function App() {
         </Route>
 
         {/* private routes */}
-        <Route element={<RequiresAuth allowedRoles={["admin", "client","unsigned"]} />}>
+        <Route element={<RequiresAuth allowedRoles={["admin", "regular","unsigned"]} />}>
         <Route path="/profile" element={<Profile />} />
         </Route>
        

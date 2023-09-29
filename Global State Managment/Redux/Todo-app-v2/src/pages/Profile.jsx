@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { authActions } from "../store/UsersSlice";
 
@@ -8,24 +8,6 @@ export default function Profile() {
   const User = useSelector((state) => state.users.User);
   const users = useSelector((state) => state.users.users);
   const todos = useSelector((state) => state.todos.todos);
-
-  useEffect(() => {
-
-    console.log(User);
-
-  const loggedUserID = users?.find((user) => user.username === User?.username).id;
-
-  const filterLoggedTodosCompleted = todos?.filter((todo) => todo.creatorID === loggedUserID && todo.completed === true);
-
-    const filterLoggedTodosPending = todos?.filter((todo) => todo.creatorID === loggedUserID && todo.completed === false);
-
-  console.log(`Tasks completed: ${filterLoggedTodosCompleted.length}`);
-
-  console.log(`Tasks pending: ${filterLoggedTodosPending.length}`);
-
-
-  }, [User, todos]);
-
 
   const handleChangePassword = () => {
 

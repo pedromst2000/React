@@ -69,7 +69,7 @@ const handleDelete = () => {
             <Link to={`/movies/${props.movie.id}`}>See Details</Link>
           </button>
         </div>
-      ) : User.role == "client" ? (
+      ) : User.role == "regular" ? (
         <div className="movie-actions">
           <button>
             <Link to={`/movies/${props.movie.id}`}>See Details</Link>

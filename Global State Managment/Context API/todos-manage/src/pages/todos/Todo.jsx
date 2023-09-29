@@ -44,16 +44,10 @@ function Todo() {
   }, [todos, category, creator, foundTodo, id]);
 
 
-
-  // const handleViewTodo = (id) => {
-
-
-  // };
-
-
-
   return (
     <>
+    {console.log(foundTodo)}
+    
      {
       timeLoading < 2 ? 
       <Loading timeLoading={timeLoading} setTimeLoading={setTimeLoading} /> :

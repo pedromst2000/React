@@ -3,12 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { todosActions } from "../../store/TodosSlice";
 import TodosList from "../../components/todos/TodosList";
 import FilterTodos from "../../components/todos/FilterTodos";
+import AddTodos from "../../components/todos/AddTodos";
 
 export default function Todos() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
-  const [isFilterCategory, setIsFilterCategory] = useState(false);
-  const [isFilterSearch, setIsFilterSearch] = useState(false);
   const todos = useSelector((state) => state.todos.todos);
   const User = useSelector((state) => state.users.User);
   const users = useSelector((state) => state.users.users);
@@ -16,17 +15,13 @@ export default function Todos() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("search", search);
 
-    console.log("category", category);
   }, [search, category]);
 
   const filterLoggedTodos = () => {
-
     if (!User?.isLogged) return [];
 
     if (User?.role === "unsigned") return [];
-   
     else if (User?.role === "regular" || User?.role === "admin") {
       const loggedUserID = users?.find(
         (user) => user.username === User?.username
@@ -36,8 +31,7 @@ export default function Todos() {
         (todo) => todo.creatorID === loggedUserID
       );
 
-        return filterLoggedTodos;
-
+      return filterLoggedTodos;
     }
   };
 
@@ -65,18 +59,51 @@ export default function Todos() {
     );
   };
 
+  const handleAddTodo = (task, categoryID, description, creatorID) => {};
+
   return (
     <div className="todos-container">
       <div className="todos-filter">
-        <FilterTodos
-          categories={categories}
-          setSearch={setSearch}
-          setCategory={setCategory}
-        />
+        {User?.isLogged  ? (
+          <FilterTodos
+            categories={categories}
+            setSearch={setSearch}
+            setCategory={setCategory}
+          />
+        ) : null}
       </div>
       <div className="todos-list">
         <TodosList
-          todos={User?.isLogged ? filterLoggedTodos() : todos}
+          todos={
+          //   // filter bouth
+           search !== "" && category != "All" ?
+            filterLoggedTodos()?.filter(
+              (todo) =>
+                todo.task.toLowerCase().includes(search.toLowerCase()) 
+                && 
+                categories?.find(
+                  (category) => category.id === todo.categoryID
+                ).name.toLowerCase().includes(category.toLowerCase())
+            ) 
+            :
+            // filter search
+            search !== "" && category === "All" ?
+            filterLoggedTodos()?.filter(
+              (todo) =>
+                todo.task.toLowerCase().includes(search.toLowerCase())
+            )
+            :
+            // filter category
+            search === "" && category !== "All" ?
+            filterLoggedTodos()?.filter(
+              (todo) =>
+                categories?.find(
+                  (category) => category.id === todo.categoryID
+                ).name.toLowerCase().includes(category.toLowerCase())
+            )
+            :
+              filterLoggedTodos() ? filterLoggedTodos() : []
+          }
           User={User}
           users={users}
           categories={categories}
@@ -84,6 +111,18 @@ export default function Todos() {
           handleUpdateTodo={handleUpdateTodo}
         />
       </div>
+      {
+        User && User.isLogged && User.role !== "unsigned" ? 
+        <div className="todos-add">
+          <AddTodos
+            categories={categories}
+            handleAddTodo={handleAddTodo}
+            User={User}
+          /> 
+        </div>
+        :
+        null
+      }
     </div>
   );
 }

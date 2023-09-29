@@ -66,7 +66,7 @@ export default function MovieDetail() {
           >Delete</button>
           <button className="watchbtn">Watch Movie</button>
         </div>
-      ) : User.role == "client" ? (
+      ) : User.role == "regular" ? (
         <div className="movie-actions">
           <button className="watchbtn">Watch Movie</button>
         </div>

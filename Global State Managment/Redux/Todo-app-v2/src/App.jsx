@@ -24,7 +24,11 @@ function App() {
 
             <Route path="/todos">
               <Route index element={<Todos />} />
+              
+              {/* protected route */}
+              <Route element={<IsAuthenticated roles={["admin", "regular"]} />}>              
               <Route path=":id" element={<Todo />} />
+              </Route>
 
                 {/* Protected route */}
                 <Route element={<IsAuthenticated roles={["admin", "regular"]} />}>
