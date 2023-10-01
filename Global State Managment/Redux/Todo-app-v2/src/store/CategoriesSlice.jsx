@@ -27,6 +27,14 @@ export const categoriesSlice = createSlice({
       // updating the state in localStorage
       localStorage.setItem("categories", JSON.stringify(state.categories));
     },
+
+    deleteCategory: (state, action) => {
+      const { id } = action.payload;
+
+      state.categories = [
+        ...state.categories.filter((category) => category.id !== id),
+      ];
+    },
   },
 });
 

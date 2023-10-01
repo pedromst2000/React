@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../store/UsersSlice";
+import { usersActions } from "../store/UsersSlice";
 
 
 export default function Profile() {
@@ -23,7 +23,7 @@ export default function Profile() {
     }
 
     else {
-        dispatch(authActions.changePassword({ newPassword: newPassword}));
+        dispatch(usersActions.changePassword({ newPassword: newPassword}));
     }
   
   };

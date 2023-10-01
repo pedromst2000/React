@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { todosActions } from "../../store/TodosSlice";
 import TodosList from "../../components/todos/TodosList";
 import FilterTodos from "../../components/todos/FilterTodos";
-import AddTodos from "../../components/todos/AddTodos";
+import { Link } from "react-router-dom";
+
 
 export default function Todos() {
   const [search, setSearch] = useState("");
@@ -59,8 +60,6 @@ export default function Todos() {
     );
   };
 
-  const handleAddTodo = (task, categoryID, description, creatorID) => {};
-
   return (
     <div className="todos-container">
       <div className="todos-filter">
@@ -114,11 +113,9 @@ export default function Todos() {
       {
         User && User.isLogged && User.role !== "unsigned" ? 
         <div className="todos-add">
-          <AddTodos
-            categories={categories}
-            handleAddTodo={handleAddTodo}
-            User={User}
-          /> 
+            <button>
+              <Link to="/todos/add">+ Add Todo</Link>
+            </button>
         </div>
         :
         null

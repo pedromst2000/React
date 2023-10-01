@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
-import { authActions } from '../store/UsersSlice'
+import { usersActions } from '../store/UsersSlice'
 import { checkEmail } from "../utils/checkEmail";
 
 export default function Login({isClicked, setIsClicked}) {
@@ -27,13 +27,13 @@ export default function Login({isClicked, setIsClicked}) {
             return;
         }
 
-       else if(!users.some(user => user.email === email)) {
+       else if(!users?.some(user => user.email === email)) {
             setMessage('Email not found');
             setIsSuccess(false);
             return;
        }
 
-         else if(!users.some(user => user.password === password)) {
+         else if(!users?.some(user => user.password === password)) {
             setMessage('Wrong password');
             setIsSuccess(false);
             return;
@@ -43,9 +43,9 @@ export default function Login({isClicked, setIsClicked}) {
             setMessage('Login success');
             setIsSuccess(true);
          setTimeout(() => {
-            dispatch(authActions.login({
-                username: users.find(user => user.email === email).username,
-                role: users.find(user => user.email === email).role,
+            dispatch(usersActions.login({
+                username: users?.find(user => user.email === email).username,
+                role: users?.find(user => user.email === email).role,
                 isLogged: true
             }));
          }, 2000);

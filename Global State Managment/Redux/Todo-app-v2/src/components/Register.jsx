@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Proptypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
-import { authActions } from "../store/UsersSlice";
+import { usersActions } from "../store/UsersSlice";
 import { checkUsername } from "../utils/checkUsername";
 import { checkEmail } from "../utils/checkEmail";
 
@@ -52,7 +52,7 @@ const handleRegister = (username, email, password) => {
         setMessage('Register success');
         setIsSuccess(true);
         setTimeout(() => {
-            dispatch(authActions.register({
+            dispatch(usersActions.register({
                 username: username,
                 email: email,
                 password: password,

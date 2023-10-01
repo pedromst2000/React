@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {useSelector, useDispatch} from 'react-redux'
-import { authActions } from '../store/UsersSlice'
+import { usersActions } from '../store/UsersSlice'
 
 export default function Navbar() {
   
@@ -9,7 +9,7 @@ export default function Navbar() {
   const dispatch = useDispatch(); // actions
   
   const handleLogout = () => {
-      dispatch(authActions.logout({
+      dispatch(usersActions.logout({
         username: "",
         role: "",
         isLogged: false,

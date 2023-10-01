@@ -18,7 +18,15 @@ function TodoItem({ ...props }) {
           </td>
           <td>{props.todo.completed ? "Completed" : "Pending"}</td>
           <td>
-            
+            <button
+              onClick={() => {
+                props.handeDeleteTodo(
+                  props.todo.id
+                );
+              }}
+            >
+              Delete
+            </button>
             &nbsp;
             <button
                    onClick={() => {
